@@ -1,0 +1,16 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+/* main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 1rem;
+    top: 7rem;
+} */
+
+header {
+    margin-top: 2rem;
+}

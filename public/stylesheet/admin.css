@@ -1,0 +1,8 @@
+.dropdown {
+    list-style: none;
+}
+
+
+.dropdown ul li select {
+    border: none;
+}

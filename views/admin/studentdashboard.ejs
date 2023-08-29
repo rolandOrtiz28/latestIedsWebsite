@@ -1,0 +1,273 @@
+<% layout('/layouts/adminboilerplate') -%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheet/admin.css">
+
+    <div class="container">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-Pending-tab" data-bs-toggle="tab" data-bs-target="#nav-Pending"
+                    type="button" role="tab" aria-controls="nav-Pending" aria-selected="true">Pending</button>
+                <button class="nav-link" id="nav-Approved-tab" data-bs-toggle="tab" data-bs-target="#nav-Approved"
+                    type="button" role="tab" aria-controls="nav-Approved" aria-selected="false">Approved</button>
+                <button class="nav-link" id="nav-Declined-tab" data-bs-toggle="tab" data-bs-target="#nav-Declined"
+                    type="button" role="tab" aria-controls="nav-Declined" aria-selected="false">Declined</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-Pending" role="tabpanel" aria-labelledby="nav-Pending-tab"
+                tabindex="0">
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <h2 class="h2">For Approval</h2>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Student #</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Curriculum</th>
+                                    <th scope="col">Grade</th>
+                                    <th scope="col">Status</th>
+
+                                </tr>
+                            </thead>
+                            <% for(let student of students){ %>
+                                <% if(student.status.includes("Pending")){ %>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= student.student.studentNumber%>
+                                            </th>
+                                            <td>
+                                                <%= student.student.lastName%>
+                                                    <%= student.student.firstName%>
+
+                                            </td>
+                                            <td>
+                                                <%= student.curriculum%>
+                                            </td>
+                                            <td>
+                                                <%= student.yearLevel%>
+                                            </td>
+                                            <td>
+                                                <select class="form-select form-select-sm student-status"
+                                                    aria-label=".form-select-sm example"
+                                                    data-student-id="<%= student._id %>">
+                                                    <option <%=student.status==='Pending' ? 'selected' : '' %>
+                                                        value="Pending">Pending</option>
+                                                    <option <%=student.status==='Approved' ? 'selected' : '' %>
+                                                        value="Approved">Approved</option>
+                                                    <option <%=student.status==='Declined' ? 'selected' : '' %>
+                                                        value="Declined">Declined</option>
+
+                                                </select>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                    <% } %>
+                                        <% } %>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="tab-pane fade" id="nav-Approved" role="tabpanel" aria-labelledby="nav-Approved-tab"
+                tabindex="0">
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <h1 class="h1">Approved Students</h1>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Student #</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Curriculum</th>
+                                    <th scope="col">Grade</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <% for(let student of students){ %>
+                                <% if(student.status.includes("Approved")){ %>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= student.student.studentNumber%>
+                                            </th>
+                                            <td>
+                                                <%= student.student.lastName%>
+                                                    <%= student.student.firstName%>
+
+                                            </td>
+                                            <td>
+                                                <%= student.curriculum%>
+                                            </td>
+                                            <td>
+                                                <%= student.yearLevel%>
+                                            </td>
+                                            <td style="background-color: rgb(0, 179, 0);color: white;"
+                                                class="text-center">
+                                                <%= student.status %>
+                                            </td>
+                                            <td>
+                                                <% if(currentUser){ %>
+                                                    <form class="d-inline"
+                                                        action="/students/<%=student._id%>?_method=DELETE"
+                                                        method="post">
+                                                        <button class="btn-sm btn-danger  text-center">DELETE</button>
+                                                    </form>
+                                                    <% } %>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+
+                                    <% } %>
+                                        <% } %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-Declined" role="tabpanel" aria-labelledby="nav-Declined-tab"
+                tabindex="0">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <h1 class="h1">Declined Students</h1>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Student #</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Curriculum</th>
+                                    <th scope="col">Grade</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <% for(let student of students){ %>
+                                <% if(student.status.includes("Declined")){ %>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= student.student.studentNumber%>
+                                            </th>
+                                            <td>
+                                                <%= student.student.lastName%>
+                                                    <%= student.student.firstName%>
+
+                                            </td>
+                                            <td>
+                                                <%= student.curriculum%>
+                                            </td>
+                                            <td>
+                                                <%= student.yearLevel%>
+                                            </td>
+                                            <td style="background-color: rgb(179, 0, 0);color: white;"
+                                                class="text-center">
+                                                <%= student.status %>
+                                            </td>
+                                            <td class="text-center">
+                                                <% if(currentUser){ %>
+                                                    <li class="nav-item dropdown">
+                                                        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
+                                                            href="#" id="navbarDropdownMenuLink" role="button"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            Update
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="navbarDropdownMenuLink">
+                                                            <li>
+                                                                <form class="d-inline"
+                                                                    action="/students/<%=student._id%>?_method=DELETE"
+                                                                    method="post">
+                                                                    <button class="dropdown-item">Delete</button>
+                                                                </form></a>
+                                                            </li>
+                                                            <li>
+                                                                <select
+                                                                    class="form-select form-select-sm student-status"
+                                                                    aria-label=".form-select-sm example"
+                                                                    data-student-id="<%= student._id %>">
+                                                                    <option <%=student.status==='Pending' ? 'selected'
+                                                                        : '' %>
+                                                                        value="Pending">Pending</option>
+                                                                    <option <%=student.status==='Approved' ? 'selected'
+                                                                        : '' %>
+                                                                        value="Approved">Approved</option>
+                                                                    <option <%=student.status==='Declined' ? 'selected'
+                                                                        : '' %>
+                                                                        value="Declined">Declined</option>
+
+                                                                </select>
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </li>
+                                                    <% } %>
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+
+                                    <% } %>
+                                        <% } %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.student-status').change(function () {
+                var studentId = $(this).data('student-id');
+                var status = $(this).val();
+
+                $.ajax({
+                    url: '/students/' + studentId + '/update',
+                    type: 'PUT',
+                    data: { status: status },
+                    success: function (response) {
+                        console.log('Student status updated successfully');
+
+                        // Update the DOM to reflect the status change
+                        var row = $(this).closest('tr');
+                        row.remove(); // Remove the row from the current tab
+
+                        // Add the row to the appropriate tab
+                        if (status === 'Approved') {
+                            $('#nav-Approved table tbody').append(row);
+                        } else if (status === 'Declined') {
+                            $('#nav-Declined table tbody').append(row);
+                        }
+                    },
+                    error: function (error) {
+                        console.log('Error updating student status');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>

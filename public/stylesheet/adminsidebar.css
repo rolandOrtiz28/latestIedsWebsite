@@ -1,0 +1,77 @@
+body {
+    background-color: #000000;
+}
+
+@media (min-width: 991.98px) {
+    main {
+        padding-left: 240px;
+    }
+}
+
+#sidebarMenu {
+    background-color: #1d3557;
+}
+
+#sidebarMenu .list-group .list-group-item {
+    background-color: #1d3557 !important;
+    /* transition: all .5s ease-in-out; */
+
+    /* To hide the extra width */
+}
+
+#sidebarMenu .list-group .list-group-item:hover {
+    background-color: #ffffff !important;
+
+    border-radius: 20px 0 0 20px;
+    /* transform: translateX(-7.5%); */
+    margin-left: 1rem;
+}
+
+#sidebarMenu .list-group .list-group-item {
+    color: #a8dadc;
+}
+
+#sidebarMenu .list-group .list-group-item:hover {
+    color: #0015ff;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 58px 0 0;
+    /* Height of navbar */
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+    width: 240px;
+    z-index: 600;
+
+}
+
+@media (max-width: 991.98px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+.sidebar .active {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgba(32, 110, 255, 0.975), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+}
+
+#main-navbar {
+    background-color: #1d3557;
+}
