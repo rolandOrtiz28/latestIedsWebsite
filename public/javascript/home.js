@@ -67,3 +67,23 @@ document.addEventListener("DOMContentLoaded", function () {
         isScrolling = setTimeout(handleScroll, 100);
     });
 });
+
+
+// Mapbox function
+mapboxgl.accessToken = 'pk.eyJ1Ijoicm9sYW5kMjgiLCJhIjoiY2xnNWtncThtMDRjajNnbGpxcWZ5ZWtlbCJ9.HrvXqgj8TXitDWQVAnHyew';
+const map = new mapboxgl.Map({
+    container: 'map',
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/mapbox/satellite-streets-v12',
+    center: [105.053994, 11.123324],
+    zoom: 15
+});
+
+
+const marker1 = new mapboxgl.Marker()
+    .setLngLat([105.053994, 11.123324])
+    .addTo(map);
+
+
+
+// Translation Function
