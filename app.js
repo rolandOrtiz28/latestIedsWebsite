@@ -21,6 +21,7 @@ const Admin = require('./model/admin')
 const studentRoute = require('./routes/registration')
 const subscribeRoute = require('./routes/subscribe')
 const adminRoute = require('./routes/admin')
+const scheduleRoute = require('./routes/schedule')
 const cors = require('cors');
 
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/iedsinternationalschool'
@@ -162,6 +163,7 @@ app.post('/send', catchAsync(async (req, res) => {
 app.use('/', studentRoute);
 app.use('/', subscribeRoute);
 app.use('/', adminRoute);
+app.use('/', scheduleRoute);
 
 
 
