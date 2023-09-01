@@ -6,6 +6,8 @@ const catchAsync = require('../utils/CatchAsync')
 const Admin = require('../model/admin')
 const nodemailer = require('nodemailer')
 const Registration = require('../model/registration')
+const moment = require('moment')
+const Schedule = require('../model/schedule')
 
 
 // Authentication Section
@@ -33,17 +35,17 @@ router.post('/register', catchAsync(async (req, res) => {
         const existingUsername = await Admin.findOne({ username })
         if (existingUsername) {
             req.flash('error', 'A user with the given username is already registered')
-            return res.redirect('/login')
+            return res.redirect('/register')
         }
         const existingEmail = await Admin.findOne({ email })
         if (existingEmail) {
             req.flash('error', 'A user with the given email is already registered')
-            return res.redirect('/login')
+            return res.redirect('/register')
         }
         const confirmPassword = req.body['confirm-password'];
         if (password !== confirmPassword) {
             req.flash('error', 'Password do not match');
-            return res.redirect('/login');
+            return res.redirect('/register');
         } else {
             const admin = new Admin({ email, username });
             const registeredUser = await Admin.register(admin, password);
@@ -112,6 +114,89 @@ router.delete('/students/:id', catchAsync(async (req, res) => {
 
     res.redirect('/admin/students');
 }))
+
+
+
+// SCHOOL CALENDAR
+router.get('/admin/calendar', async (req, res) => {
+    const currentDate = moment();
+    const year = currentDate.year();
+    let month = currentDate.month() + 1;
+
+
+    if (req.query.month) {
+
+        const requestedMonth = parseInt(req.query.month);
+
+
+        if (requestedMonth >= 1 && requestedMonth <= 12) {
+            month = requestedMonth;
+        }
+    }
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const monthName = monthNames[month - 1];
+
+    const calendar = generateCalendarData(year, month)
+    const startDayOfWeek = 0;
+    const weeks = generateWeekCalendarData(year, month, startDayOfWeek);
+    const isMonthActive = req.query.tab !== 'week';
+    const isWeekActive = !isMonthActive;
+    const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
+    const endDay = firstDayOfMonth.clone().endOf('month').endOf('week');
+    const schedules = await Schedule.find({ date: { $gte: firstDayOfMonth, $lte: endDay } });
+
+
+    res.render('admin/schoolCalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules });
+});
+
+function generateWeekCalendarData(year, month, startDayOfWeek) {
+    const calendar = [];
+
+    const currentDate = moment();
+    const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
+    const currentDay = currentDate.startOf('week').add(startDayOfWeek, 'days');
+
+    const week = [];
+    for (let i = 0; i < 7; i++) {
+        week.push({
+            day: currentDay.date(),
+            isCurrentMonth: currentDay.month() === firstDayOfMonth.month(),
+            isToday: currentDay.isSame(moment(), 'day')
+        });
+        currentDay.add(1, 'day');
+    }
+
+    calendar.push(week);
+
+    return calendar;
+}
+
+
+function generateCalendarData(year, month) {
+    const calendar = []
+
+    const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month')
+    const startDay = firstDayOfMonth.clone().startOf('week')
+    const endDay = firstDayOfMonth.clone().endOf('month').endOf('week')
+    let currentDay = startDay.clone();
+    while (currentDay.isSameOrBefore(endDay, 'day')) {
+        const week = [];
+        for (let i = 0; i < 7; i++) {
+            week.push({
+                day: currentDay.date(),
+                isCurrentMonth: currentDay.month() === firstDayOfMonth.month(),
+                isToday: currentDay.isSame(moment(), 'day')
+            });
+            currentDay.add(1, 'day');
+        }
+        calendar.push(week);
+    }
+
+    return calendar;
+}
 
 
 module.exports = router;
