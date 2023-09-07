@@ -68,7 +68,7 @@ router.post('/register', catchAsync(async (req, res) => {
     }
 }));
 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login', keepSessionInfo: true }), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/adminlogin', keepSessionInfo: true }), (req, res) => {
     req.flash('success', "Welcome Admin")
     res.redirect('/')
 })

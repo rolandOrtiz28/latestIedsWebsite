@@ -34,6 +34,7 @@ i18next.init({
                 click: "(click here)",
                 computer: "Computer",
                 dayCare: "Day-care",
+<<<<<<< HEAD
                 regTitle: "Student registration form",
                 firstName: "First name",
                 lastName: "Last name",
@@ -50,6 +51,14 @@ i18next.init({
                 motherWork: "Mother's Occupation",
                 fatherWork: "Father's Occupation",
                 phone: "Phone Number",
+=======
+                khmerDescription: "to provide comprehensive educational experiences for students to develop their skills and knowledge in the Khmer language and culture. This program aims to enhance reading, writing, speaking, and listening abilities in Khmer, fostering a deeper understanding of Cambodia's history, literature, and traditions. It often focuses on language proficiency, literacy, and cultural appreciation, catering to students who wish to strengthen their connection to their Cambodian heritage.",
+                IEPDescription: "The International English Program offers a globally-oriented approach to English language learning. Geared towards students who want to achieve fluency and competency in English, this program emphasizes effective communication in various contexts. It typically covers grammar, vocabulary, reading, writing, speaking, and listening skills. Additionally, it might incorporate cross-cultural communication and exposure to international topics, preparing students for academic, professional, and social interactions on a global scale.",
+                GEPDescription: "The General English Program provides a comprehensive foundation in English language skills for individuals at various proficiency levels. This curriculum is tailored to improve everyday communication skills, including speaking, listening, reading, and writing. It might include practical language use in everyday scenarios such as travel, work, and social interactions. The program's flexibility often caters to students seeking to enhance their language skills for personal, academic, or professional purposes.",
+                chineseDescription: "Chinese Language Classes focus on teaching Mandarin Chinese, one of the world's most spoken languages. These classes cater to beginners and those with previous exposure to Chinese, aiming to develop proficiency in speaking, listening, reading, and writing. The curriculum typically covers essential vocabulary, grammar, sentence structures, and cultural insights related to the Chinese-speaking world. This program could benefit students interested in cross-cultural communication, business opportunities, travel, or academic pursuits related to China.",
+                computerDescription: "Computer Programs offer a diverse range of courses aimed at enhancing digital literacy and technical skills. These programs cover topics such as programming, software development, web design, data analysis, and more. Students learn how to effectively use software applications and programming languages, which are valuable skills in today's technology-driven world. Computer programs often cater to individuals looking to pursue careers in IT, software development, data science, and related fields.",
+                dayCareDescription: "Day-care programs provide a nurturing and supportive environment for young children while their parents or guardians are at work or engaged in other activities. These programs ensure the safety, well-being, and early development of children through a combination of play, social interaction, creative activities, and sometimes basic learning experiences. Day-care facilities may include structured routines, supervised playtime, and opportunities for educational exploration, helping children develop social skills and foundational knowledge in a safe setting.",
+>>>>>>> f57ab65c099483a7da0bad536de88646de4e8d72
 
 
 
@@ -91,6 +100,7 @@ i18next.init({
                 click: "(ចុច​ទីនេះ)",
                 computer: "កុំព្យូទ័រ",
                 dayCare: "ការថែទាំពេលថ្ងៃ",
+<<<<<<< HEAD
                 regTitle: "ទម្រង់ចុះឈ្មោះនិស្សិតងៃ",
                 firstName: "ឈ្មោះដំបូង",
                 lastName: "នាមត្រកូល",
@@ -108,6 +118,14 @@ i18next.init({
                 fatherWork: "មុខរបររបស់ឪពុក",
                 phone: "លេខទូរសព្ទ",
 
+=======
+                khmerDescription: "ដើម្បីផ្តល់បទពិសោធន៍អប់រំដ៏ទូលំទូលាយដល់សិស្សានុសិស្ស ដើម្បីអភិវឌ្ឍជំនាញ និងចំណេះដឹងរបស់ពួកគេក្នុងភាសា និងវប្បធម៌ខ្មែរ។ កម្មវិធីនេះមានគោលបំណងពង្រឹងសមត្ថភាពអាន សរសេរ ការនិយាយ និងស្តាប់ជាភាសាខ្មែរ ជំរុញការយល់ដឹងកាន់តែស៊ីជម្រៅអំពីប្រវត្តិសាស្ត្រ អក្សរសាស្ត្រ និងប្រពៃណីរបស់កម្ពុជា។ ជារឿយៗវាផ្តោតលើជំនាញភាសា អក្ខរកម្ម និងការឱ្យតម្លៃវប្បធម៌ ផ្តល់អាហារដល់សិស្សានុសិស្សដែលមានបំណងចង់ពង្រឹងទំនាក់ទំនងរបស់ពួកគេជាមួយបេតិកភណ្ឌកម្ពុជា។",
+                IEPDescription: "កម្មវិធីភាសាអង់គ្លេសអន្តរជាតិផ្តល់នូវវិធីសាស្រ្តតម្រង់ទិសជាសកលសម្រាប់ការរៀនភាសាអង់គ្លេស។ គោលបំណងឆ្ពោះទៅរកសិស្សដែលចង់សម្រេចបាននូវភាពស្ទាត់ជំនាញ និងសមត្ថភាពជាភាសាអង់គ្លេស កម្មវិធីនេះសង្កត់ធ្ងន់លើការប្រាស្រ័យទាក់ទងប្រកបដោយប្រសិទ្ធភាពក្នុងបរិបទផ្សេងៗ។ ជាទូទៅវាគ្របដណ្តប់លើវេយ្យាករណ៍ វាក្យសព្ទ ការអាន ការសរសេរ ការនិយាយ និងជំនាញស្តាប់។ លើសពីនេះ វាអាចរួមបញ្ចូលការប្រាស្រ័យទាក់ទងឆ្លងវប្បធម៌ និងការបង្ហាញពីប្រធានបទអន្តរជាតិ រៀបចំសិស្សសម្រាប់ការសិក្សា វិជ្ជាជីវៈ និងអន្តរកម្មសង្គមនៅលើមាត្រដ្ឋានសកល។",
+                GEPDescription: "កម្មវិធីភាសាអង់គ្លេសទូទៅផ្តល់នូវមូលដ្ឋានគ្រឹះដ៏ទូលំទូលាយក្នុងជំនាញភាសាអង់គ្លេសសម្រាប់បុគ្គលម្នាក់ៗនៅកម្រិតជំនាញផ្សេងៗ។ កម្មវិធីសិក្សានេះត្រូវបានរៀបចំឡើងដើម្បីកែលម្អជំនាញទំនាក់ទំនងប្រចាំថ្ងៃ រួមទាំងការនិយាយ ការស្តាប់ ការអាន និងការសរសេរ។ វាអាចរួមបញ្ចូលការប្រើប្រាស់ភាសាជាក់ស្តែងនៅក្នុងសេណារីយ៉ូប្រចាំថ្ងៃ ដូចជាការធ្វើដំណើរ ការងារ និងទំនាក់ទំនងសង្គម។ ភាពបត់បែនរបស់កម្មវិធី ជារឿយៗផ្តល់ភាពងាយស្រួលដល់សិស្សដែលស្វែងរកការពង្រឹងជំនាញភាសារបស់ពួកគេសម្រាប់គោលបំណងផ្ទាល់ខ្លួន ការសិក្សា ឬវិជ្ជាជីវៈ។",
+                chineseDescription: "ថ្នាក់ភាសាចិនផ្តោតសំខាន់លើការបង្រៀនភាសាចិនកុកងឺ ដែលជាភាសាមួយក្នុងចំនោមភាសានិយាយច្រើនជាងគេលើពិភពលោក។ ថ្នាក់ទាំងនេះផ្តល់ជូនសម្រាប់អ្នកចាប់ផ្តើមដំបូង និងអ្នកដែលមានបទពិសោធន៍ភាសាចិនពីមុន ដើម្បីអភិវឌ្ឍជំនាញក្នុងការនិយាយ ការស្តាប់ ការអាន និងការសរសេរ។ កម្មវិធីសិក្សាជាធម្មតាគ្របដណ្តប់វាក្យសព្ទសំខាន់ៗ វេយ្យាករណ៍ រចនាសម្ព័ន្ធប្រយោគ និងការយល់ដឹងអំពីវប្បធម៌ដែលទាក់ទងនឹងពិភពនិយាយភាសាចិន។ កម្មវិធីនេះអាចផ្តល់អត្ថប្រយោជន៍ដល់សិស្សដែលចាប់អារម្មណ៍លើការទំនាក់ទំនងឆ្លងវប្បធម៌ ឱកាសអាជីវកម្ម ការធ្វើដំណើរ ឬការបន្តការសិក្សាទាក់ទងនឹងប្រទេសចិន។",
+                computerDescription: "កម្មវិធីកុំព្យូទ័រផ្តល់ជូននូវវគ្គសិក្សាចម្រុះក្នុងគោលបំណងលើកកំពស់ចំណេះដឹងផ្នែកឌីជីថល និងជំនាញបច្ចេកទេស។ កម្មវិធីទាំងនេះគ្របដណ្តប់លើប្រធានបទដូចជា ការសរសេរកម្មវិធី ការអភិវឌ្ឍន៍កម្មវិធី ការរចនាគេហទំព័រ ការវិភាគទិន្នន័យ និងច្រើនទៀត។ សិស្សរៀនពីរបៀបប្រើប្រាស់កម្មវិធី Software និងភាសាសរសេរកម្មវិធីប្រកបដោយប្រសិទ្ធភាព ដែលជាជំនាញដ៏មានតម្លៃនៅក្នុងពិភពបច្ចេកវិទ្យាដែលជំរុញដោយបច្ចេកវិទ្យានាពេលបច្ចុប្បន្ននេះ។ កម្មវិធីកុំព្យូទ័រ ច្រើនតែផ្តល់ជូនបុគ្គលដែលចង់បន្តអាជីពក្នុងផ្នែក IT ការអភិវឌ្ឍន៍កម្មវិធី វិទ្យាសាស្ត្រទិន្នន័យ និងផ្នែកដែលពាក់ព័ន្ធ។",
+                dayCareDescription: "កម្មវិធីថែទាំពេលថ្ងៃផ្តល់នូវបរិយាកាសចិញ្ចឹមបីបាច់ និងគាំទ្រដល់កុមារតូចៗ ខណៈពេលដែលឪពុកម្តាយ ឬអាណាព្យាបាលរបស់ពួកគេកំពុងធ្វើការ ឬចូលរួមក្នុងសកម្មភាពផ្សេងទៀត។ កម្មវិធីទាំងនេះធានាសុវត្ថិភាព សុខុមាលភាព និងការអភិវឌ្ឍន៍ដំបូងរបស់កុមារ តាមរយៈការរួមបញ្ចូលគ្នានៃការលេង អន្តរកម្មសង្គម សកម្មភាពច្នៃប្រឌិត និងពេលខ្លះបទពិសោធន៍សិក្សាជាមូលដ្ឋាន។ កន្លែងថែទាំពេលថ្ងៃអាចរួមបញ្ចូលនូវទម្លាប់ដែលមានរចនាសម្ព័ន្ធ ពេលវេលាលេងដែលមានការត្រួតពិនិត្យ និងឱកាសសម្រាប់ការរុករកផ្នែកអប់រំ ជួយកុមារអភិវឌ្ឍជំនាញសង្គម និងចំណេះដឹងជាមូលដ្ឋាននៅក្នុងកន្លែងដែលមានសុវត្ថិភាព។",
+>>>>>>> f57ab65c099483a7da0bad536de88646de4e8d72
             }
         }
     }
@@ -152,6 +170,12 @@ function updateContent() {
 
     const computerElements = document.querySelectorAll('.computer');
     const dayCareElements = document.querySelectorAll('.dayCare');
+    const khmerDescriptionElements = document.querySelectorAll('.curriculum-khmer-description');
+    const IEPDescriptionElements = document.querySelectorAll('.curriculum-IEP-description');
+    const GEPDescriptionElements = document.querySelectorAll('.curriculum-GEP-description');
+    const chineseDescriptionElements = document.querySelectorAll('.curriculum-chinese-description');
+    const computerDescriptionElements = document.querySelectorAll('.curriculum-computer-description');
+    const dayCareDescriptionElements = document.querySelectorAll('.curriculum-daycare-description');
 
 
     const regTitleElements = document.querySelectorAll('.reg-title');
@@ -270,6 +294,7 @@ function updateContent() {
     dayCareElements.forEach(function (element) {
         element.textContent = i18next.t('translation:dayCare');
     });
+<<<<<<< HEAD
     regTitleElements.forEach(function (element) {
         element.textContent = i18next.t('translation:regTitle');
     });
@@ -318,6 +343,27 @@ function updateContent() {
     phoneNumberElements.forEach(function (element) {
         element.textContent = i18next.t('translation:phone');
     });
+=======
+    khmerDescriptionElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:khmerDescription');
+    });
+    IEPDescriptionElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:IEPDescription');
+    });
+    GEPDescriptionElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:GEPDescription');
+    });
+    chineseDescriptionElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:chineseDescription');
+    });
+    computerDescriptionElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:computerDescription');
+    });
+    dayCareDescriptionElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:dayCareDescription');
+    });
+
+>>>>>>> f57ab65c099483a7da0bad536de88646de4e8d72
 
 }
 
