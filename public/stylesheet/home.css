@@ -149,36 +149,47 @@
   opacity: 0;
 }
 
-
+/* mission and vision */
 .objectives {
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   background-color: #3a86ff;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  padding: 10px;
   gap: 2rem;
-  margin-top: 2rem;
   border-radius: 20px 20px 0 0;
   font-family: 'Ubuntu', sans-serif;
+  color: white;
+}
+.mission-about h5{
+  font-size: 30px;
 }
 
-.objectives .obj-container {
-  width: 95%;
-  height: 50vh;
-  border: 2px solid white;
-  border-radius: 10rem 0 10rem 0
+.mission-about p{
+font-size: 20px;
+
 }
 
-.obj-container img {
-  width: 650px;
-  height: 320px;
-  border-top-left-radius: 10rem;
-  border-bottom-right-radius: 10rem;
+.logo2 img{
+  color: #ffcd93;
+  width: 700px;
+height: 450px;
+  /* perspective: 250px;
+  transform: rotateX(0deg) rotateY(40deg) rotateZ(0deg) skewX(-10deg) translateX(220px) translateY(25px) ; */
+transform: perspective(1000px)rotateY(25deg)rotateX(0deg)rotateZ(-2deg);
+  position: relative;
+  left:100px;
+  top: 0px;
+box-shadow: -15px 7px 7px rgb(255, 255, 255);
+border-radius: 20px;
+}
+.mission-about h2{
+  font-size: 50px;
 }
 
+
+/* Statistics */
 .stats {
   width: 100%;
   height: 50vh;
@@ -310,7 +321,7 @@
 /* CONTACT */
 .contact {
   width: 100%;
-  height: 120vh;
+  height: 100vh;
   font-family: 'Ubuntu', sans-serif;
 
 }
