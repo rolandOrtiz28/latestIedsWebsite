@@ -1,0 +1,45 @@
+  .showpage {
+      width: 100%;
+      height: auto;
+      border: thick double #32a1ce;
+      margin-bottom: 5rem;
+      display: flex;
+      justify-content: center;
+      font-family: 'Ubuntu', sans-serif;
+      background-image: linear-gradient(rgba(255, 255, 255, .03), rgb(0, 130, 11, .06)), url("/images/board.jpg");
+      background-size: cover;
+      background-position: center;
+
+  }
+
+  .showpage .row {
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+  }
+
+  .carousel-item img {
+      width: 600px;
+      border-radius: 10px;
+      opacity: .9;
+  }
+
+  .row h1 {
+      font-size: 50px;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+  }
+
+  p {
+      color: white;
+      font-size: 20px;
+  }
+
+  h5 {
+      color: rgba(255, 255, 255, .7);
+  }
+
+  a {
+      text-decoration: none;
+  }

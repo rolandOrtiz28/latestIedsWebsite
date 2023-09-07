@@ -24,45 +24,65 @@
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Parent's Information</h3>
-                                    <form action="/parents" method="POST" novalidate>
+                                    <h3 class="mb-5 text-uppercase parents-title">Parent's Information</h3>
+                                    <form action="/parents" method="POST" class="needs-validation" novalidate>
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
                                                 <div class="form-outline">
                                                     <input type="text" id="form3Example1m1"
-                                                        class="form-control form-control-lg" name="motherName" />
-                                                    <label class="form-label" for="form3Example1m1">Mother's
+                                                        class="form-control form-control-lg" name="motherName"
+                                                        required />
+                                                    <label class="form-label mother" for="form3Example1m1">Mother's
                                                         name</label>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-4">
                                                 <div class="form-outline">
                                                     <input type="text" id="form3Example1n1"
-                                                        class="form-control form-control-lg" name="fatherName" />
-                                                    <label class="form-label" for="form3Example1n1">Father's
+                                                        class="form-control form-control-lg" name="fatherName"
+                                                        required />
+                                                    <label class="form-label father" for="form3Example1n1">Father's
                                                         name</label>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form3Example8" class="form-control form-control-lg"
-                                                name="motherOccupation" />
-                                            <label class="form-label" for="form3Example8">Mother's Occupation</label>
+                                                name="motherOccupation" required />
+                                            <label class="form-label  mother-work" for="form3Example8">Mother's
+                                                Occupation</label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form3Example8" class="form-control form-control-lg"
-                                                name="fatherOccupation" />
-                                            <label class="form-label" for="form3Example8">Father's Occupation</label>
+                                                name="fatherOccupation" required />
+                                            <label class="form-label  father-work" for="form3Example8">Father's
+                                                Occupation</label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
                                         </div>
                                         <div class="form-outline mb-3">
                                             <input type="number" id="form3Example8" class="form-control form-control-lg"
-                                                name="phoneNumber" />
-                                            <label class="form-label" for="form3Example8">Phone Number</label>
+                                                name="phoneNumber" required />
+                                            <label class="form-label phoneNumber" for="form3Example8">Phone
+                                                Number</label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
                                         </div>
 
                                         <div class="d-flex justify-content-end pt-3">
-                                            <button type="submit" class="btn btn-primary btn-lg ms-2">Next</button>
+                                            <button type="submit" class="btn btn-primary btn-lg ms-2 next">Next</button>
                                         </div>
 
                                 </div>
@@ -74,3 +94,5 @@
             </div>
         </div>
     </section>
+
+    <script src="/javascript/validation.js"></script>

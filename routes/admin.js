@@ -4,11 +4,16 @@ const router = express.Router();
 const passport = require('passport')
 const catchAsync = require('../utils/CatchAsync')
 const Admin = require('../model/admin')
+const Update = require('../model/updates')
 const nodemailer = require('nodemailer')
 const Registration = require('../model/registration')
 const moment = require('moment')
 const Schedule = require('../model/schedule')
-
+const { isLoggedIn } = require('../middleware')
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage })
+const { cloudinary } = require('../cloudinary');
 
 // Authentication Section
 router.get('/adminregister', (req, res) => {
@@ -82,7 +87,7 @@ router.get('/logout', (req, res, next) => {
 
 
 // Students
-router.get('/admin/students', async (req, res) => {
+router.get('/admin/students', isLoggedIn, catchAsync(async (req, res) => {
     try {
         const students = await Registration.find({});
         res.render('admin/studentdashboard', { students });
@@ -91,7 +96,7 @@ router.get('/admin/students', async (req, res) => {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
-});
+}));
 
 router.put('/students/:id/update', catchAsync(async (req, res) => {
     try {
@@ -118,7 +123,7 @@ router.delete('/students/:id', catchAsync(async (req, res) => {
 
 
 // SCHOOL CALENDAR
-router.get('/admin/calendar', async (req, res) => {
+router.get('/admin/calendar', isLoggedIn, catchAsync(async (req, res) => {
     const currentDate = moment();
     const year = currentDate.year();
     let month = currentDate.month() + 1;
@@ -150,7 +155,7 @@ router.get('/admin/calendar', async (req, res) => {
 
 
     res.render('admin/schoolCalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules });
-});
+}));
 
 function generateWeekCalendarData(year, month, startDayOfWeek) {
     const calendar = [];
@@ -198,5 +203,37 @@ function generateCalendarData(year, month) {
     return calendar;
 }
 
+// updates
+router.get('/updates-dashboard', isLoggedIn, catchAsync(async (req, res) => {
+
+    const updates = await Update.find({});
+    res.render('admin/update-dashboard', { updates });
+
+}));
+
+router.put('/updates/:id', upload.array('image'), isLoggedIn, catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const update = await Update.findByIdAndUpdate(id, { ...req.body.update });
+    const imgs = req.files.map(i => ({ url: i.path, filename: i.filename }));
+    update.images.push(...imgs);
+    await update.save()
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        await update.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    }
+    await update.save();
+    req.flash('success', 'update updated')
+    res.redirect(`/updates-dashboard`)
+
+}))
+
+
+router.delete('/updates/:id', catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await Update.findByIdAndDelete(id);
+    res.redirect('/updates-dashboard');
+}))
 
 module.exports = router;

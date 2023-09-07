@@ -1,0 +1,64 @@
+<% layout('/layouts/boilerplate') -%>
+    <link rel="stylesheet" href="/stylesheet/updates.css">
+    <div class="container-fluid main-update">
+        <!-- Button trigger modal -->
+
+        <h1 class="mb-5 update-title text-center">IEDS UPDATES</h1>
+        <div class="row">
+            <div class="d-flex flex-column justify-content-center align-items-center update-wrapper">
+                <!-- Latest Update Section -->
+                <div class="col-md-9 latest-update mb-4">
+                    <h2 class="mb-4 text-center">Latest Update</h2>
+                    <div class="main-content">
+                        <div class="card" style="width: 20rem;">
+                            <img src="<%= latestUpdate.images[0].url %>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    <%= latestUpdate.title %>
+                                </h3>
+                                <small class="text-muted">
+                                    Published: <%= latestUpdate.createdAt.toLocaleDateString()%>
+                                </small>
+                                <p class="card-text">
+                                    <%= latestUpdate.subDescription %>
+                                </p>
+                                <a href="/updates/<%=latestUpdate._id%>" class="btn btn-primary">More info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Updates Section -->
+                <div class="col-md-9 previous-updates">
+                    <h2 class="mb-4 text-center">Previous Updates</h2>
+                    <div class="main-content">
+                        <% for(let update of previousUpdates ){ %>
+                            <a href="/updates/<%=update._id%>">
+                                <div class="card2">
+                                    <img src="<%= update.images[0].url %>" class="card-img-top img-fluid" alt="...">
+                                    <div class="card__content">
+                                        <p class="card__title">
+                                            <%= update.title %>
+                                        </p>
+                                        <p class="card__description">
+                                            <%= update.subDescription %>
+                                        </p>
+                                        <small class="text-muted">
+                                            Published: <%= latestUpdate.createdAt.toLocaleDateString()%>
+                                        </small>
+                                    </div>
+                                </div>
+                            </a>
+                            <% } %>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal -->

@@ -1,0 +1,110 @@
+<% updates.forEach(function(update){%>
+
+    <div class="modal fade" id="updateProduct<%= update._id %>" tabindex="-1"
+        aria-labelledby="updateProductLabel<%= update._id %>" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateProductLabel">New Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/updates/<%= update._id %>?_method=PUT" method="POST"
+                        class="validated-form needs-validation" novalidate enctype="multipart/form-data">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="update[title]" placeholder="title"
+                                aria-label="title" aria-describedby="basic-addon1" value="<%= update.title %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a name.
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-text">Description</span>
+                            <textarea name="update[description]" class="form-control"
+                                aria-label="With textarea"><%= update.description %></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="mb-3">
+                                <label for="formFileMultiple" class="form-label">Choose an image</label>
+                                <input class="form-control" type="file" id="image" name="image" multiple>
+                            </div>
+                        </div>
+                        <% update.images.forEach((image, i)=> { %>
+                            <div class="col mt-4">
+                                <div class="card" style="width: 100px;">
+                                    <img class="card-img" src="<%= image.thumbnail %>" alt="">
+                                    <div class="card-img-overlay text-end pt-1 pe-2">
+                                        <label class="visually-hidden" for="image-<%= i %>">Delete Image</label>
+                                        <input class="form-check-input" type="checkbox" name="deleteImages[]"
+                                            value="<%= image.filename %>" id="image-<%= i %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <button type="submit" class="mt-5 btn btn-secondary">Update</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+
+
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/newUpdates" method="POST" class="needs-validation" novalidate
+                            enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Title</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Update title" name="update[title]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    name="update[description]"></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Sub-Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    name="update[subDescription]"></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFileMultiple" class="form-label">Choose an image</label>
+                                <input class="form-control" type="file" id="image" name="image" multiple>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create new Update</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>

@@ -24,55 +24,78 @@
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Student registration form</h3>
-                                    <form action="/student" method="POST" novalidate>
+                                    <h3 class="mb-5 text-uppercase reg-title">Student registration form</h3>
+                                    <form action="/student" method="POST" class="needs-validation" novalidate>
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
                                                 <div class="form-outline">
                                                     <input type="text" id="form3Example1m"
-                                                        class="form-control form-control-lg" name="firstName" />
-                                                    <label class="form-label" for="form3Example1m">First name</label>
+                                                        class="form-control form-control-lg" name="firstName"
+                                                        required />
+                                                    <label class="form-label firstName" for="form3Example1m">First
+                                                        name</label>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-4">
                                                 <div class="form-outline">
                                                     <input type="text" id="form3Example1n"
-                                                        class="form-control form-control-lg" name="lastName" />
-                                                    <label class="form-label" for="form3Example1n">Last name</label>
+                                                        class="form-control form-control-lg" name="lastName" required />
+                                                    <label class="form-label lastName" for="form3Example1n">Last
+                                                        name</label>
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="number" id="form3Example90"
-                                                class="form-control form-control-lg" style="width: 100px;" name="age" />
-                                            <label class="form-label" for="form3Example90">Age</label>
+                                                class="form-control form-control-lg" style="width: 100px;" name="age"
+                                                required />
+                                            <label class="form-label age" for="form3Example90">Age</label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="date" id="form3Example97" class="form-control form-control-lg"
-                                                name="birthday" />
-                                            <label class="form-label" for="form3Example97">Birthday</label>
+                                                name="birthday" required />
+                                            <label class="form-label bday" for="form3Example97">Birthday</label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
                                         </div>
 
+                                        <div class="form-outline mb-4">
+                                            <select class="form-select" aria-label="Disabled select example"
+                                                name="gender" style="width: 100px;" required>
 
-                                        <select class="form-select mb-5" aria-label="Disabled select example"
-                                        name="gender" style="width: 100px;">
-                                        <option selected disabled>Gender</option>
-                                        <option value="Male">Male
-                                        </option>
-                                        <option value="International English Program">Female</option>
-                                        
-                                    </select>
 
+                                                <option value="Male" class="male">Male
+                                                </option>
+                                                <option value="Female" class="female">Female</option>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                            </select>
+                                            <label for="form-label" for="gender" class="gender">Gender</label>
+                                        </div>
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form3Example8" class="form-control form-control-lg"
-                                                name="address" />
-                                            <label class="form-label" for="form3Example8">Address</label>
+                                                name="address" required />
+                                            <label class="form-label address" for="form3Example8">Address</label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
                                         </div>
 
 
                                         <div class="d-flex justify-content-end pt-3">
-                                            <button type="submit" class="btn btn-primary btn-lg ms-2">Next</button>
+                                            <button type="submit" class="btn btn-primary btn-lg ms-2 next">Next</button>
                                         </div>
 
                                 </div>
@@ -84,3 +107,5 @@
             </div>
         </div>
     </section>
+
+    <script src="/javascript/validation.js"></script>

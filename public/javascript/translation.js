@@ -34,6 +34,22 @@ i18next.init({
                 click: "(click here)",
                 computer: "Computer",
                 dayCare: "Day-care",
+                regTitle: "Student registration form",
+                firstName: "First name",
+                lastName: "Last name",
+                Age: "Age",
+                bDay: "Birthday",
+                gender: "Gender",
+                male: "Male",
+                female: "Female",
+                address: "Address",
+                next: "Next",
+                parentsTitle: "Parent's Information",
+                mother: "Mother's Name",
+                father: "Father's Name",
+                motherWork: "Mother's Occupation",
+                fatherWork: "Father's Occupation",
+                phone: "Phone Number",
 
 
 
@@ -75,6 +91,23 @@ i18next.init({
                 click: "(ចុច​ទីនេះ)",
                 computer: "កុំព្យូទ័រ",
                 dayCare: "ការថែទាំពេលថ្ងៃ",
+                regTitle: "ទម្រង់ចុះឈ្មោះនិស្សិតងៃ",
+                firstName: "ឈ្មោះដំបូង",
+                lastName: "នាមត្រកូល",
+                Age: "អាយុ",
+                bDay: "ថ្ងៃកំណើត",
+                gender: "ភេទ",
+                male: "ប្រុស",
+                female: "ស្រី",
+                address: "អាស័យដ្ឋាន",
+                next: "បន្ទាប់",
+                parentsTitle: "ព័ត៌មានរបស់ឪពុកម្តាយ",
+                mother: "ឈ្មោះម្តាយ",
+                father: "ឈ្មោះ​ឪពុក",
+                motherWork: "មុខរបររបស់ម្តាយ",
+                fatherWork: "មុខរបររបស់ឪពុក",
+                phone: "លេខទូរសព្ទ",
+
             }
         }
     }
@@ -106,6 +139,8 @@ function updateContent() {
     const EmailSubjectElements = document.querySelectorAll('.email-subject');
     const EmailMessageElements = document.querySelectorAll('.email-message');
     const sendElements = document.querySelectorAll('.send');
+
+
     const homeNavElements = document.querySelectorAll('.home-nav');
     const facultyNavElements = document.querySelectorAll('.faculty-nav');
     const studentsNavElements = document.querySelectorAll('.students-nav');
@@ -113,8 +148,30 @@ function updateContent() {
     const contactUsNavElements = document.querySelectorAll('.contactUs-nav');
     const enrollElements = document.querySelectorAll('.enroll');
     const clickElements = document.querySelectorAll('.click');
+
+
     const computerElements = document.querySelectorAll('.computer');
     const dayCareElements = document.querySelectorAll('.dayCare');
+
+
+    const regTitleElements = document.querySelectorAll('.reg-title');
+    const firstNameElements = document.querySelectorAll('.firstName');
+    const lastNameElements = document.querySelectorAll('.lastName');
+    const ageElements = document.querySelectorAll('.age');
+    const bDayElements = document.querySelectorAll('.bday');
+    const genderElements = document.querySelectorAll('.gender');
+    const maleElements = document.querySelectorAll('.male');
+    const femaleElements = document.querySelectorAll('.female');
+    const addressElements = document.querySelectorAll('.address');
+    const nextElements = document.querySelectorAll('.next');
+
+    const parentTitleElements = document.querySelectorAll('.parents-title');
+    const motherElements = document.querySelectorAll('.mother');
+    const fatherElements = document.querySelectorAll('.father');
+    const motherWorkElements = document.querySelectorAll('.mother-work');
+    const fatherWorkElements = document.querySelectorAll('.father-work');
+    const phoneNumberElements = document.querySelectorAll('.phoneNumber');
+
 
     titleElements.forEach(function (element) {
         element.textContent = i18next.t('translation:mission');
@@ -213,10 +270,56 @@ function updateContent() {
     dayCareElements.forEach(function (element) {
         element.textContent = i18next.t('translation:dayCare');
     });
-
+    regTitleElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:regTitle');
+    });
+    firstNameElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:firstName');
+    });
+    lastNameElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:lastName');
+    });
+    ageElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:Age');
+    });
+    bDayElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:bDay');
+    });
+    genderElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:gender');
+    });
+    maleElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:male');
+    });
+    femaleElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:female');
+    });
+    addressElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:address');
+    });
+    nextElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:next');
+    });
+    parentTitleElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:parentsTitle');
+    });
+    motherElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:mother');
+    });
+    fatherElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:father');
+    });
+    motherWorkElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:motherWork');
+    });
+    fatherWorkElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:fatherWork');
+    });
+    phoneNumberElements.forEach(function (element) {
+        element.textContent = i18next.t('translation:phone');
+    });
 
 }
-
 
 
 document.getElementById('toggle-switch').addEventListener('change', function () {
