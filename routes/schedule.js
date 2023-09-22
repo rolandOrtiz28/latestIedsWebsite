@@ -7,7 +7,7 @@ const catchAsync = require('../utils/CatchAsync')
 
 
 router.post('/schedule', catchAsync(async (req, res) => {
-    const { title, date, time, description, reminders } = req.body.schedule;
+    const { title, date, time, description, reminders, backgroundColor } = req.body.schedule;
     const timeObj = new Date(`1970-01-01T${time}`);
     const formattedTime = format(timeObj, 'hh:mm a');
     const schedule = new Schedule({
@@ -15,12 +15,15 @@ router.post('/schedule', catchAsync(async (req, res) => {
         date,
         time: formattedTime,
         description,
-        reminders
+        reminders,
+        backgroundColor, // Add backgroundColor here
     });
-    await schedule.save()
-    req.flash('success', 'New Schedule Created')
-    res.redirect('/admin/calendar')
-}))
+    await schedule.save();
+    req.flash('success', 'New Schedule Created');
+    res.redirect('/admin/calendar');
+}));
+
+
 
 router.delete('/schedule/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -44,6 +47,7 @@ router.put('/schedule/:id/update', catchAsync(async (req, res) => {
         res.status(500).json({ success: false });
     }
 }));
+
 
 
 router.get('/schedule/:id/fetch', catchAsync(async (req, res) => {

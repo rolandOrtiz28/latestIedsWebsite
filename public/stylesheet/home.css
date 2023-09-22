@@ -5,8 +5,10 @@
 }
 
 .carousel-item img {
-  width: 1970px;
-  height: 500px;
+  width: 100%;
+  /* Use 100% width to make images responsive */
+  height: auto;
+  /* Automatically adjust height to maintain aspect ratio */
 }
 
 .container-box {
@@ -162,29 +164,31 @@
   font-family: 'Ubuntu', sans-serif;
   color: white;
 }
-.mission-about h5{
+
+.mission-about h5 {
   font-size: 30px;
 }
 
-.mission-about p{
-font-size: 20px;
+.mission-about p {
+  font-size: 20px;
 
 }
 
-.logo2 img{
+.logo2 img {
   color: #ffcd93;
   width: 700px;
-height: 450px;
+  height: 450px;
   /* perspective: 250px;
   transform: rotateX(0deg) rotateY(40deg) rotateZ(0deg) skewX(-10deg) translateX(220px) translateY(25px) ; */
-transform: perspective(1000px)rotateY(25deg)rotateX(0deg)rotateZ(-2deg);
+  transform: perspective(1000px)rotateY(25deg)rotateX(0deg)rotateZ(-2deg);
   position: relative;
-  left:100px;
+  left: 100px;
   top: 0px;
-box-shadow: -15px 7px 7px rgb(255, 255, 255);
-border-radius: 20px;
+  box-shadow: -15px 7px 7px rgb(255, 255, 255);
+  border-radius: 20px;
 }
-.mission-about h2{
+
+.mission-about h2 {
   font-size: 50px;
 }
 
@@ -323,7 +327,7 @@ border-radius: 20px;
   width: 100%;
   height: 100vh;
   font-family: 'Ubuntu', sans-serif;
-
+  margin-bottom: 2rem;
 }
 
 .contact .info {
@@ -511,4 +515,17 @@ border-radius: 20px;
   100% {
     transform: rotate(360deg);
   }
+}
+
+@media (max-width: 768px) {
+
+  /* Define your responsive styles here */
+  .container-box {
+    flex-direction: column;
+    /* Stack elements vertically on smaller screens */
+    gap: 20px;
+    /* Increase spacing between elements */
+  }
+
+  /* Adjust other styles as needed */
 }

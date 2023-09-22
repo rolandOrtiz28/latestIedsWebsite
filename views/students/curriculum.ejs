@@ -1,4 +1,5 @@
 <% layout('/layouts/boilerplate') -%>
+
     <style>
         .card-registration .select-input.form-control[readonly]:not([disabled]) {
             font-size: 1rem;
@@ -25,41 +26,113 @@
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase">Curriculum</h3>
-                                    <form action="/curriculum" method="POST" novalidate>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-4">
-                                                <select class="form-select" aria-label="Disabled select example"
-                                                    name="curriculum">
-                                                    <option selected disabled>Curriculum</option>
-                                                    <option value="Khmer Education Program">Khmer Education Program
-                                                    </option>
-                                                    <option value="International English Program">International English
-                                                        Program</option>
-                                                    <option value="General English Program">General English Program
-                                                    </option>
-                                                    <option value="Chinese Language Classes">Chinese Language Classes
-                                                    </option>
-                                                    <option value="Computer Programs">Computer Programs</option>
-                                                    <option value="Day-care">Day-care</option>
-                                                    <option disabled>Extra services:</option>
-                                                    <option value="Transportation">Transportation</option>
-                                                </select>
+                                    <form action="/curriculum" method="POST" class="needs-validation" novalidate>
+                                        <div class="wrapper">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    <select class="form-select" aria-label="Disabled select example"
+                                                        name="curriculum" required>
+                                                        <option selected disabled>Curriculum</option>
+                                                        <option value="Khmer Education Program">Khmer Education Program
+                                                        </option>
+                                                        <option value="International English Program">International
+                                                            English
+                                                            Program</option>
+                                                        <option value="General English Program">General English Program
+                                                        </option>
+                                                        <option value="Chinese Language Classes">Chinese Language
+                                                            Classes
+                                                        </option>
+                                                        <option value="Computer Programs">Computer Programs</option>
+                                                        <option value="Day-care">Day-care</option>
+                                                        <option disabled>Extra services:</option>
+                                                        <option value="Transportation">Transportation</option>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <select class="form-select" aria-label="Disabled select example"
+                                                        name="yearLevel" required>
+                                                        <option selected disabled>Year Level</option>
+                                                        <option value="Level 1">Level 1
+                                                        </option>
+                                                        <option value="Level 2">Level 2</option>
+                                                        <option value="Level 3">Level 3
+                                                        </option>
+                                                        <option value="Level 4">Level 4
+                                                        </option>
+                                                        <option value="Level 5">Level 5</option>
+                                                        <option value="Level 6">Level 6</option>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 mb-4">
-                                                <select class="form-select" aria-label="Disabled select example"
-                                                    name="yearLevel">
-                                                    <option selected disabled>Year Level</option>
-                                                    <option value="Level 1">Level 1
-                                                    </option>
-                                                    <option value="Level 2">Level 2</option>
-                                                    <option value="Level 3">Level 3
-                                                    </option>
-                                                    <option value="Level 4">Level 4
-                                                    </option>
-                                                    <option value="Level 5">Level 5</option>
-                                                    <option value="Level 6">Level 6</option>
 
-                                                </select>
+                                            <div class="col-md-6 mb-4 w-100 agreement">
+                                                <h3 class="mb-3">Terms & Conditions</h3>
+                                                <p><strong class="reminder text-danger">(please make sure to check the
+                                                        boxes before
+                                                        clicking the
+                                                        button)</strong></p>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="defaultCheck1">
+                                                    <label class="form-check-label agree-1" for="defaultCheck1">
+                                                        1. I agree to abide by the rules and regulations of IEDS and the
+                                                        jurisdiction of the laws of Cambodia.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="defaultCheck1">
+                                                    <label class="form-check-label agree-2" for="defaultCheck1">
+                                                        2. I understand that although IEDS will provide supervision and
+                                                        care will be taken to prevent accidents from occurring;
+                                                        however, sometimes accidents are unavoidable. In the event of an
+                                                        accident, I authorize IEDS to take appropriate actions
+                                                        for the well-being of my child and shall not hold IEDS liable
+                                                        for such accident(s) and action(s) they take.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="defaultCheck1">
+                                                    <label class="form-check-label agree-3" for="defaultCheck1">
+                                                        3. I have read and agreed to abide by the IEDS's payment policy.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="defaultCheck1">
+                                                    <label class="form-check-label agree-4" for="defaultCheck1">
+                                                        4. I understand that IEDS INTERNATIONAL SCHOOL has the sole,
+                                                        exclusive and final right to administer selective enrolment of
+                                                        students application for the best interest of the school.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="defaultCheck1">
+                                                    <label class="form-check-label agree-5" for="defaultCheck1">
+                                                        5. I declare that the information given in this application form
+                                                        is true and accurate and understand that a failure to
+                                                        provide accurate information can result in immediate withdrawal
+                                                        of the applicant's admission and dismissal from IEDS.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="defaultCheck1">
+                                                    <label class="form-check-label agree-6" for="defaultCheck1">
+                                                        6. I understand that photographs/videos of my child may be used
+                                                        on printed or electronic material in the public relations
+                                                        of the school.
+                                                    </label>
+                                                </div>
                                             </div>
                                             <button class="btn btn-primary" type="submit">Register</button>
                                         </div>
@@ -72,3 +145,55 @@
                 </div>
             </div>
     </section>
+
+    <script src="/javascript/validation.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all the checkboxes
+            const checkboxes = document.querySelectorAll(".form-check-input");
+
+            // Get the Register button
+            const registerButton = document.querySelector(".btn-primary");
+
+            // Get the curriculum and year level select elements
+            const curriculumSelect = document.querySelector("select[name='curriculum']");
+            const yearLevelSelect = document.querySelector("select[name='yearLevel']");
+
+            // Function to check if all checkboxes are checked
+            function areAllCheckboxesChecked() {
+                for (const checkbox of checkboxes) {
+                    if (!checkbox.checked) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // Function to enable/disable the Register button
+            function updateRegisterButton() {
+                if (curriculumSelect.value !== "" && yearLevelSelect.value !== "" && areAllCheckboxesChecked()) {
+                    registerButton.removeAttribute("disabled");
+                } else {
+                    registerButton.setAttribute("disabled", "disabled");
+                }
+            }
+
+            // Add event listeners to the checkboxes
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener("change", updateRegisterButton);
+            });
+
+            // Handle form submission
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function (event) {
+                if (curriculumSelect.value === "" || yearLevelSelect.value === "" || !areAllCheckboxesChecked()) {
+                    event.preventDefault(); // Prevent form submission if criteria not met
+                    alert("Please select both Curriculum and Year Level, and agree to all terms.");
+                }
+            });
+
+            // Initial check
+            updateRegisterButton();
+        });
+    </script>

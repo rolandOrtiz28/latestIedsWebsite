@@ -1,25 +1,41 @@
-  /* Custom styles for the sidebar */
-  .sidebar {
-    height: 100vh;
+/* Custom styles for the sidebar */
+.sidebar {
+    height: 100%;
     width: 250px;
-
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #2772e3;
+
     transition: left 0.3s;
-    z-index: 2;
+    z-index: 7;
 }
 
 .sidebar.show {
     left: 0;
 }
 
-.sidebar ul {
-    margin: 2rem 0 0 2rem;
+.search-btn {
+    background: none !important;
 }
 
-.sidebar li a {
-    color: white;
+.student-wrapper {
+    overflow-y: auto;
+
+    max-height: none;
+
+    height: calc(100vh - 50px);
+
+}
+
+.student-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+h6 a {
+    color: white !important;
     text-decoration: none;
+}
+
+h6 a:hover {
+    color: red !important;
 }

@@ -1,9 +1,9 @@
 <% layout('/layouts/adminboilerplate') -%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheet/admin.css">
 
     <div class="container">
+
+
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-Pending-tab" data-bs-toggle="tab" data-bs-target="#nav-Pending"
@@ -12,6 +12,13 @@
                     type="button" role="tab" aria-controls="nav-Approved" aria-selected="false">Approved</button>
                 <button class="nav-link" id="nav-Declined-tab" data-bs-toggle="tab" data-bs-target="#nav-Declined"
                     type="button" role="tab" aria-controls="nav-Declined" aria-selected="false">Declined</button>
+                <div id="searchBarContainer" class="input-group rounded w-25 ms-auto" style="display: none;">
+                    <input type="text" class="form-control rounded" id="searchInput" placeholder="Search"
+                        aria-label="Search" aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                        <button id="searchButton" class="" style="border: none;"><i class="fas fa-search"></i></button>
+                    </span>
+                </div>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -20,7 +27,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="pendingTable" width="100%" cellspacing="0">
                             <h2 class="h2">For Approval</h2>
                             <thead>
                                 <tr>
@@ -29,19 +36,20 @@
                                     <th scope="col">Curriculum</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
 
                                 </tr>
                             </thead>
                             <% for(let student of students){ %>
                                 <% if(student.status.includes("Pending")){ %>
-                                    <tbody>
+                                    <tbody id="pendingTableBody">
                                         <tr>
                                             <th scope="row">
                                                 <%= student.student.studentNumber%>
                                             </th>
                                             <td>
-                                                <%= student.student.lastName%>
-                                                    <%= student.student.firstName%>
+                                                <%= student.student.firstName%>
+                                                    <%= student.student.lastName%>
 
                                             </td>
                                             <td>
@@ -63,7 +71,45 @@
 
                                                 </select>
                                             </td>
+                                            <td>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
+                                                        href="#" id="navbarDropdownMenuLink" role="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Update
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-end"
+                                                        aria-labelledby="navbarDropdownMenuLink">
+                                                        <li class="text-center dropdown-item" data-toggle="modal"
+                                                            data-target="#studentDetailsModal"
+                                                            data-student='<%= JSON.stringify(student) %>'
+                                                            data-student-id='<%= student._id%>'
+                                                            style="cursor: pointer;">
+                                                            View Details
+                                                        </li>
 
+                                                        <li class="text-center">
+                                                            <% if(currentUser){ %>
+                                                                <form class="d-inline text-center dropdown-item"
+                                                                    action="/students/<%=student._id%>?_method=DELETE"
+                                                                    method="post">
+                                                                    <button
+                                                                        style="border: none; background: none;">Delete</button>
+                                                                </form>
+                                                                <% } %>
+                                                        </li>
+                                                        <li class="text-center">
+                                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                                data-bs-target="#updateStudent<%= student._id %>"
+                                                                data-bs-whatever="@getbootstrap"
+                                                                style="cursor: pointer;">
+                                                                Update</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+
+                                            </td>
                                         </tr>
 
                                     </tbody>
@@ -81,7 +127,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="approvedTable" width="100%" cellspacing="0">
                             <h1 class="h1">Approved Students</h1>
                             <thead>
                                 <tr>
@@ -90,19 +136,20 @@
                                     <th scope="col">Curriculum</th>
                                     <th scope="col">Grade</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Edit</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <% for(let student of students){ %>
                                 <% if(student.status.includes("Approved")){ %>
-                                    <tbody>
+                                    <tbody id="approvedTableBody">
                                         <tr>
                                             <th scope="row">
                                                 <%= student.student.studentNumber%>
                                             </th>
                                             <td>
-                                                <%= student.student.lastName%>
-                                                    <%= student.student.firstName%>
+
+                                                <%= student.student.firstName%>
+                                                    <%= student.student.lastName%>
 
                                             </td>
                                             <td>
@@ -116,13 +163,43 @@
                                                 <%= student.status %>
                                             </td>
                                             <td>
-                                                <% if(currentUser){ %>
-                                                    <form class="d-inline"
-                                                        action="/students/<%=student._id%>?_method=DELETE"
-                                                        method="post">
-                                                        <button class="btn-sm btn-danger  text-center">DELETE</button>
-                                                    </form>
-                                                    <% } %>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
+                                                        href="#" id="navbarDropdownMenuLink" role="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Update
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-end"
+                                                        aria-labelledby="navbarDropdownMenuLink">
+                                                        <li class="text-center dropdown-item" data-toggle="modal"
+                                                            data-target="#studentDetailsModal"
+                                                            data-student='<%= JSON.stringify(student) %>'
+                                                            data-student-id='<%= student._id%>'
+                                                            style="cursor: pointer;">
+                                                            View Details
+                                                        </li>
+
+                                                        <li class="text-center">
+
+                                                            <form class="d-inline text-center dropdown-item"
+                                                                action="/students/<%=student._id%>?_method=DELETE"
+                                                                method="post">
+                                                                <button
+                                                                    style="border: none; background: none;">Delete</button>
+                                                            </form>
+
+                                                        </li>
+                                                        <li class="text-center">
+                                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                                data-bs-target="#updateStudent<%= student._id %>"
+                                                                data-bs-whatever="@getbootstrap"
+                                                                style="cursor: pointer;">
+                                                                Update</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+
                                             </td>
                                         </tr>
 
@@ -138,7 +215,7 @@
                 tabindex="0">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="declinedTable" width="100%" cellspacing="0">
                             <h1 class="h1">Declined Students</h1>
                             <thead>
                                 <tr>
@@ -152,14 +229,15 @@
                             </thead>
                             <% for(let student of students){ %>
                                 <% if(student.status.includes("Declined")){ %>
-                                    <tbody>
+                                    <tbody id="declinedTableBody">
                                         <tr>
                                             <th scope="row">
                                                 <%= student.student.studentNumber%>
                                             </th>
                                             <td>
-                                                <%= student.student.lastName%>
-                                                    <%= student.student.firstName%>
+
+                                                <%= student.student.firstName%>
+                                                    <%= student.student.lastName%>
 
                                             </td>
                                             <td>
@@ -229,45 +307,15 @@
 
     </div>
 
+    </div>
+    <%- include('../modals/student') %>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/javascript/studentadmin.js"></script>
 
 
 
 
-    <script>
-        $(document).ready(function () {
-            $('.student-status').change(function () {
-                var studentId = $(this).data('student-id');
-                var status = $(this).val();
-
-                $.ajax({
-                    url: '/students/' + studentId + '/update',
-                    type: 'PUT',
-                    data: { status: status },
-                    success: function (response) {
-                        console.log('Student status updated successfully');
-
-                        // Update the DOM to reflect the status change
-                        var row = $(this).closest('tr');
-                        row.remove(); // Remove the row from the current tab
-
-                        // Add the row to the appropriate tab
-                        if (status === 'Approved') {
-                            $('#nav-Approved table tbody').append(row);
-                        } else if (status === 'Declined') {
-                            $('#nav-Declined table tbody').append(row);
-                        }
-                    },
-                    error: function (error) {
-                        console.log('Error updating student status');
-                    }
-                });
-            });
-        });
-    </script>
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>

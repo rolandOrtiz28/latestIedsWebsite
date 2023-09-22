@@ -86,6 +86,7 @@ router.post('/curriculum', async (req, res) => {
     const newRegistration = new Registration(req.session.registrationData);
     await newRegistration.save();
 
+
     // Clear session data after registration is complete
     req.session.registrationData = null;
 

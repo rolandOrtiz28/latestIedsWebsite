@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">To do!</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Events</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -16,6 +16,7 @@
                         <div class="invalid-feedback">
                             Please provide a title.
                         </div>
+
                     </div>
                     <div class="bt-form bt-outline w-50 datepicker" inline="true">
                         <input id="datepicker" placeholder="Select date" type="text" class="form-control"
@@ -25,6 +26,14 @@
 
                     <div class="input-group mt-3 w-50">
                         <input type="time" name="schedule[time]" class="form-control" />
+                    </div>
+                    <div class="input-group mt-3">
+                        <label for="backgroundColor" class="input-group-text">Background Color</label>
+                        <select id="backgroundColor" name="schedule[backgroundColor]" class="form-select">
+                            <option value="Blue">Blue</option>
+                            <option value="Green">Green</option>
+                            <option value="Red">Red</option>
+                        </select>
                     </div>
 
                     <div class="input-group mt-3">
