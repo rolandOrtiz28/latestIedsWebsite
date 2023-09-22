@@ -1,7 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const imageSchema = new Schema({
+    url: String,
+    filename: String
+});
+
+
+imageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200,h_200');
+})
+
 const registrationSchema = new Schema({
+    images: [imageSchema],
     student: {
         studentNumber: String,
         firstName: String,

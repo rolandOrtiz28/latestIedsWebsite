@@ -1,10 +1,11 @@
-.container h1{
+.container h1 {
 
     font-family: 'Ubuntu', sans-serif;
     color: #3385ff;
     font-size: 78px;
 }
-.container h2{
+
+.container h2 {
 
     font-family: 'Ubuntu', sans-serif;
     color: #3385ff;
@@ -31,13 +32,25 @@
 }
 
 .calendar .task-sched {
-    background-color: rgba(0, 17, 255, 0.555);
+
     width: 100%;
     height: 40%;
     border-radius: 10px;
     overflow: hidden;
     display: flex;
     align-items: center;
+}
+
+.blue-bg {
+    background-color: Blue;
+}
+
+.green-bg {
+    background-color: Green;
+}
+
+.red-bg {
+    background-color: Red;
 }
 
 .weekly {
@@ -187,11 +200,11 @@
     }
 }
 
-.event{
+.event {
     width: 100%;
-display: flex;
-justify-content: start;
-align-items: start;
-padding: 0;
-gap: 5rem;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding: 0;
+    gap: 5rem;
 }

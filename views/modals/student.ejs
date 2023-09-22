@@ -1,0 +1,212 @@
+<% students.forEach(function(student){%>
+    <div class="modal fade" id="updateStudent<%= student._id %>" tabindex="-1"
+        aria-labelledby="studentLabel<%= student._id %>" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentLabel">Upadatinf Student Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/students/<%= student._id %>?_method=PUT" method="POST"
+                        class="validated-form needs-validation" novalidate enctype="multipart/form-data">
+                        <div class="form-outline mb-3 row">
+                            <label for="formFileMultiple" class="form-label">First Name</label>
+                            <input type="text" class="form-control w-50" name="student[firstName]"
+                                aria-label="firstName" aria-describedby="basic-addon1"
+                                value="<%= student.student.firstName %>">
+                            <label for="formFileMultiple" class="form-label">Last Name</label>
+                            <input type="text" class="form-control w-25 ms-2" name="student[lastName]"
+                                aria-label="firstName" aria-describedby="basic-addon1"
+                                value="<%= student.student.lastName %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a name.
+                            </div>
+                        </div>
+                        <div class="form-outline mb-3">
+                            <label for="formFileMultiple" class="form-label">Student Number</label>
+                            <input type="text" class="form-control w-25" name="student[studentNumber]"
+                                aria-label="firstName" aria-describedby="basic-addon1"
+                                value="<%= student.student.studentNumber %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a name.
+                            </div>
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <label for="formFileMultiple" class="form-label">Age</label>
+                            <input type="number" class="form-control w-25" name="student[age]" aria-label="firstName"
+                                aria-describedby="basic-addon1" value="<%= student.student.age %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a name.
+                            </div>
+                        </div>
+                        <div class="form-outline mb-3">
+                            <label for="formFileMultiple" class="form-label">Birthday</label>
+                            <input type="date" class="form-control w-50" name="student[birthday]" aria-label="birthday"
+                                aria-describedby="basic-addon1"
+                                value="<%= student.student.birthday ? new Date(student.student.birthday).toISOString().split('T')[0] : '' %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a name.
+                            </div>
+                        </div>
+                        <div class="form-outline mb-3">
+                            <label for="formFileMultiple" class="form-label">Address</label>
+                            <input type="text" class="form-control " name="student[address]" aria-label="firstName"
+                                aria-describedby="basic-addon1" value="<%= student.student.address %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a name.
+                            </div>
+                        </div>
+
+                        <div class="form-outline mb-3 w-50">
+                            <label for="formFileMultiple" class="form-label">Gender</label>
+                            <select class="form-select" aria-label="Gender" name="student[gender]" required>
+                                <option value="Male" class="male" <%=student.student.gender==='Male' ? 'selected' : ''
+                                    %>>Male</option>
+                                <option value="Female" class="female" <%=student.student.gender==='Female' ? 'selected'
+                                    : '' %>>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-outline mb-3 w-50">
+                            <label for="formFileMultiple" class="form-label">Curriculum</label>
+                            <select class="form-select" aria-label="Curriculum" name="student[curriculum]">
+                                <option disabled>Curriculum</option>
+                                <option value="Khmer Education Program"
+                                    <%=student.curriculum==='Khmer Education Program' ? 'selected' : '' %>
+                                    >Khmer Education Program</option>
+                                <option value="International English Program"
+                                    <%=student.curriculum==='International English Program' ? 'selected' : '' %>
+                                    >International English Program</option>
+                                <option value="General English Program"
+                                    <%=student.curriculum==='General English Program' ? 'selected' : '' %>
+                                    >General English Program</option>
+                                <option value="Chinese Language Classes"
+                                    <%=student.curriculum==='Chinese Language Classes' ? 'selected' : '' %>
+                                    >Chinese Language Classes</option>
+                                <option value="Computer Programs" <%=student.curriculum==='Computer Programs'
+                                    ? 'selected' : '' %>>Computer
+                                    Programs</option>
+                                <option value="Day-care" <%=student.curriculum==='Day-care' ? 'selected' : '' %>
+                                    >Day-care</option>
+                                <option disabled>Extra services:</option>
+                                <option value="Transportation" <%=student.curriculum==='Transportation' ? 'selected'
+                                    : '' %>>Transportation
+                                </option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="form-outline mb-3">
+                            <div class="mb-3">
+                                <label for="formFileMultiple" class="form-label">Choose an image</label>
+                                <input class="form-control" type="file" id="image" name="image" multiple>
+                            </div>
+                        </div>
+                        <% student.images.forEach((image, i)=> { %>
+                            <div class="col mt-4">
+                                <div class="card" style="width: 100px;">
+                                    <img class="card-img" src="<%= image.thumbnail %>" alt="">
+                                    <div class="card-img-overlay text-end pt-1 pe-2">
+                                        <label class="visually-hidden" for="image-<%= i %>">Delete Image</label>
+                                        <input class="form-check-input" type="checkbox" name="deleteImages[]"
+                                            value="<%= image.filename %>" id="image-<%= i %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <button type="submit" class=" btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </form>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <% }) %>
+
+
+
+
+        <div class="modal fade" id="studentDetailsModal" tabindex="-1" role="dialog"
+            aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="studentDetailsModalLabel">Student Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            style="border: none; background: none; font-size: 25px;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="studentDetailsContent">
+                            <div class="Student"
+                                style="border: 2px solid rgb(0, 110, 255); padding: 2rem; border-radius: 15px;">
+                                <h5>Student Info:</h5>
+                                <img id="studentImage" src="" alt="Student Image"
+                                    style="max-width: 200px; height: auto; border-radius: 15px; border: 2px solid rgb(84, 158, 255); margin-bottom: 1rem;">
+                                <p class=""><strong>Student #: </strong><span class="text-primary"
+                                        id="studentNumber"></span></p>
+                                <p class=""><strong>Full Name: </strong><span class="text-primary"
+                                        id="studentFullName"></span></p>
+                                <p class=""><strong>Age: </strong><span class="text-primary" id="studentAge"></span></p>
+                                <p class=""><strong>Address: </strong><span class="text-primary"
+                                        id="studentAddress"></span></p>
+                                <p class=""><strong>Gender: </strong><span class="text-primary"
+                                        id="studentGender"></span></p>
+                                <p class=""><strong>Curriculum: </strong><span class="text-primary"
+                                        id="studentCurriculum"></span></p>
+                                <p class=""><strong>Grade: </strong><span class="text-primary" id="studentGrade"></span>
+                                </p>
+                                <p class=""><strong>Status: </strong><span class="text-primary"
+                                        id="studentStatus"></span></p>
+                            </div>
+
+                            <!-- Parents' Info -->
+                            <div class="Parents"
+                                style="border: 2px solid rgb(0, 110, 255); padding: 2rem; border-radius: 15px; margin-top: 1rem; background-color: rgb(84, 158, 255);">
+                                <h5 class="text-white">Parents Info:</h5>
+                                <p class=""><strong>Father's Name: </strong><span class="text-white"
+                                        id="fatherName"></span></p>
+                                <p class=""><strong>Father's Occupation: </strong><span class="text-white"
+                                        id="fatherOccupation"></span>
+                                </p>
+                                <p class=""><strong>Mother's Name: </strong><span class="text-white"
+                                        id="motherName"></span></p>
+                                <p class=""><strong>Mother's Occupation: </strong><span class="text-white"
+                                        id="motherOccupation"></span>
+                                <p class=""><strong>Phone #: </strong><span class="text-white" id="phoneNumber"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>

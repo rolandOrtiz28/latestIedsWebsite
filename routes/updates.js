@@ -9,8 +9,8 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const { addLoadingVariable } = require('../middleware')
 const nodemailer = require('nodemailer')
 const catchAsync = require('../utils/CatchAsync')
-
-
+const moment = require('moment')
+const Schedule = require('../model/schedule')
 
 router.get('/updates', catchAsync(async (req, res) => {
     const page = parseInt(req.query.page) || 1;
@@ -70,7 +70,87 @@ router.get('/updates/:id', catchAsync(async (req, res) => {
 
 }))
 
+router.get('/schoolcalendar', async (req, res) => {
 
+    const currentDate = moment();
+    const year = currentDate.year();
+    let month = currentDate.month() + 1;
+
+
+    if (req.query.month) {
+
+        const requestedMonth = parseInt(req.query.month);
+
+
+        if (requestedMonth >= 1 && requestedMonth <= 12) {
+            month = requestedMonth;
+        }
+    }
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const monthName = monthNames[month - 1];
+
+    const calendar = generateCalendarData(year, month)
+    const startDayOfWeek = 0;
+    const weeks = generateWeekCalendarData(year, month, startDayOfWeek);
+    const isMonthActive = req.query.tab !== 'week';
+    const isWeekActive = !isMonthActive;
+    const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
+    const endDay = firstDayOfMonth.clone().endOf('month').endOf('week');
+    const schedules = await Schedule.find({ date: { $gte: firstDayOfMonth, $lte: endDay } });
+
+
+
+    res.render('calendar/homecalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules })
+})
+
+function generateWeekCalendarData(year, month, startDayOfWeek) {
+    const calendar = [];
+
+    const currentDate = moment();
+    const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
+    const currentDay = currentDate.startOf('week').add(startDayOfWeek, 'days');
+
+    const week = [];
+    for (let i = 0; i < 7; i++) {
+        week.push({
+            day: currentDay.date(),
+            isCurrentMonth: currentDay.month() === firstDayOfMonth.month(),
+            isToday: currentDay.isSame(moment(), 'day')
+        });
+        currentDay.add(1, 'day');
+    }
+
+    calendar.push(week);
+
+    return calendar;
+}
+
+
+function generateCalendarData(year, month) {
+    const calendar = []
+
+    const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month')
+    const startDay = firstDayOfMonth.clone().startOf('week')
+    const endDay = firstDayOfMonth.clone().endOf('month').endOf('week')
+    let currentDay = startDay.clone();
+    while (currentDay.isSameOrBefore(endDay, 'day')) {
+        const week = [];
+        for (let i = 0; i < 7; i++) {
+            week.push({
+                day: currentDay.date(),
+                isCurrentMonth: currentDay.month() === firstDayOfMonth.month(),
+                isToday: currentDay.isSame(moment(), 'day')
+            });
+            currentDay.add(1, 'day');
+        }
+        calendar.push(week);
+    }
+
+    return calendar;
+}
 
 
 // router.put('/:id', upload.array('image'), catchAsync(async (req, res) => {

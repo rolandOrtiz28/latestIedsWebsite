@@ -90,6 +90,7 @@ router.get('/logout', (req, res, next) => {
 router.get('/admin/students', isLoggedIn, catchAsync(async (req, res) => {
     try {
         const students = await Registration.find({});
+
         res.render('admin/studentdashboard', { students });
     } catch (error) {
         // Handle the error appropriately
@@ -97,6 +98,79 @@ router.get('/admin/students', isLoggedIn, catchAsync(async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 }));
+
+router.get('/admin/students/search', isLoggedIn, catchAsync(async (req, res) => {
+    try {
+        const searchValue = req.query.search;
+
+
+        const students = await Registration.find({
+            $or: [
+                { 'student.firstName': { $regex: searchValue, $options: 'i' } },
+                { 'student.lastName': { $regex: searchValue, $options: 'i' } }
+            ]
+        });
+
+        // Create an object to store unique student names
+        const uniqueNamesObject = {};
+
+        // Filter out duplicate student names
+        const uniqueStudents = students.filter(student => {
+            const fullName = student.student.lastName + ' ' + student.student.firstName;
+            if (!uniqueNamesObject[fullName]) {
+                uniqueNamesObject[fullName] = true;
+                return true;
+            }
+            return false;
+        });
+
+
+        res.json(uniqueStudents);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}));
+
+router.get('/admin/students/:id', isLoggedIn, async (req, res) => {
+    try {
+        const student = await Registration.findById(req.params.id);
+
+        res.render('admin/studentdashboard', { student })
+    } catch (error) {
+        // Handle the error appropriately
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+router.put('/students/:id', upload.array('image'), isLoggedIn, catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const student = await Registration.findByIdAndUpdate(id, { ...req.body }, { new: true }); // Use { new: true } to get the updated document
+
+    if (!student) {
+        req.flash('error', 'Student not found');
+        return res.redirect(`/admin/students`);
+    }
+
+    const imgs = req.files.map(i => ({ url: i.path, filename: i.filename }));
+    student.images.push(...imgs);
+
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        // Remove deleted images from the student.images array
+        student.images = student.images.filter(image => !req.body.deleteImages.includes(image.filename));
+    }
+
+    await student.save();
+
+    req.flash('success', 'Student updated');
+    res.redirect(`/admin/students#nav-Approved`);
+}));
+
 
 router.put('/students/:id/update', catchAsync(async (req, res) => {
     try {

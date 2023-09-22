@@ -68,15 +68,15 @@
                                                 <% if (schedule.date.getDate()===day.day &&
                                                     schedule.date.getMonth()===(month - 1) &&
                                                     schedule.date.getFullYear()===year) { %>
-                                                    <div class="task-sched">
-                                                        <small type="text" class="small" data-toggle="tooltip"
-                                                            data-html="true" title="
-                                                            <%= schedule.title %>
-                                                            <%= schedule.time %>" style="margin-left: 1em;">
+                                                    <div
+                                                        class="task-sched <%= schedule.backgroundColor.toLowerCase() + '-bg' %>">
+                                                        <small type="text" class="small text-white"
+                                                            data-toggle="tooltip" data-html="true" title="
+                                                        <%= schedule.title %>
+                                                        <%= schedule.time %>" style="margin-left: 1em;">
                                                             <%= schedule.title %>
                                                         </small>
                                                     </div>
-
                                                     <% } %>
                                                         <% } %>
 
@@ -135,28 +135,39 @@
                                                 <% if (schedule.date.getDate()===day.day &&
                                                     schedule.date.getMonth()===(month - 1) &&
                                                     schedule.date.getFullYear()===year) { %>
-                                                        <div class="form-check mb-3 event">
-                                                            <div class="form-check mb-3">
-    <div class="d-flex justify-content-between align-items-center">
-        <div class="flex-shrink-0">
-            <input class="checkbox" type="checkbox" checked="" value="" data-schedule-id="<%= schedule._id %>">
-        </div>
-        <div class="flex-grow-1">
-            <small class="form-check-inline"><b><%= schedule.title %></b></small>
-            <small class="form-check-inline"><%= schedule.time %></small>
-            <small class="text-muted form-check-inline"><%= schedule.description %></small>
-        </div>
-        <div>
-            <form class="delete-form" data-schedule-id="<%= schedule._id %>">
-                <button class="btn-sm delete-schedule" style="background: none;border: none;"><i class="fas fa-times"></i></button>
-            </form>
-        </div>
-    </div>
-</div>
+                                                    <div class="form-check mb-3 event">
+                                                        <div class="form-check mb-3">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <input class="checkbox" type="checkbox" checked=""
+                                                                        value="" data-schedule-id="<%= schedule._id %>">
+                                                                </div>
+                                                                <div class="flex-grow-1">
+                                                                    <small class="form-check-inline"><b>
+                                                                            <%= schedule.title %>
+                                                                        </b></small>
+                                                                    <small class="form-check-inline">
+                                                                        <%= schedule.time %>
+                                                                    </small>
+                                                                    <small class="text-muted form-check-inline">
+                                                                        <%= schedule.description %>
+                                                                    </small>
+                                                                </div>
+                                                                <div>
+                                                                    <form class="delete-form"
+                                                                        data-schedule-id="<%= schedule._id %>">
+                                                                        <button class="btn-sm delete-schedule"
+                                                                            style="background: none;border: none;"><i
+                                                                                class="fas fa-times"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 
-                                                    <% } %>
                                                         <% } %>
+                                                            <% } %>
 
                                         </td>
                                         <% } %>

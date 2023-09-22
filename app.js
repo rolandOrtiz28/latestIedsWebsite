@@ -23,7 +23,12 @@ const subscribeRoute = require('./routes/subscribe')
 const adminRoute = require('./routes/admin')
 const scheduleRoute = require('./routes/schedule')
 const updatesRoute = require('./routes/updates')
+const sidebarRoute = require('./routes/sidebar')
+
+
+
 const cors = require('cors');
+const { assert } = require('console');
 
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/iedsinternationalschool'
 
@@ -89,6 +94,8 @@ app.use((req, res, next) => {
     next();
 
 })
+
+
 
 app.get('/', async (req, res) => {
     try {
@@ -166,6 +173,7 @@ app.use('/', subscribeRoute);
 app.use('/', adminRoute);
 app.use('/', scheduleRoute);
 app.use('/', updatesRoute);
+app.use('/', sidebarRoute);
 
 
 
