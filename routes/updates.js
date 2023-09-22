@@ -24,6 +24,12 @@ router.get('/updates', catchAsync(async (req, res) => {
     // Fetch the latest update
     const latestUpdate = await Update.findOne({}, {}, { sort: { createdAt: -1 } });
 
+    if(!latestUpdate){
+res.render('updates/index', {latestUpdate: null, previousUpdates:[]})
+return
+
+    }
+
     // Fetch the four previous updates (excluding the latest one)
     const previousUpdates = await Update.find({ _id: { $ne: latestUpdate._id } }, {}, options).limit(4);
 
