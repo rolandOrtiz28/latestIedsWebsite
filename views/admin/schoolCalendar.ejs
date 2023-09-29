@@ -91,18 +91,13 @@
                         </tbody>
                     </table>
                     <div class="pagination col-3 ms-auto">
-                        <% if (month> 1) { %>
-                            <a href="/calendar?month=<%= month - 1 %>"><span class="material-symbols-outlined left">
-                                    arrow_back_ios
-                                </span></a>
-                            <% } %>
-                                <% if (month < 12) { %>
-                                    <a href="/calendar?month=<%= month + 1 %>"><span
-                                            class="material-symbols-outlined right">
-                                            arrow_forward_ios
-                                        </span></a>
-                                    <% } %>
-                    </div>
+    <% if (month > 1) { %>
+        <a href="/admin/calendar?month=<%= month - 1 %>"><span class="material-symbols-outlined left">arrow_back_ios</span></a>
+    <% } %>
+    <% if (month < 12) { %>
+        <a href="/admin/calendar?month=<%= month + 1 %>"><span class="material-symbols-outlined right">arrow_forward_ios</span></a>
+    <% } %>
+</div>
                 </div>
                 <div class="tab-pane week fade <%= isWeekActive ? 'show active' : '' %>" id="week" role="tabpanel"
                     aria-labelledby="week-tab">
@@ -183,4 +178,3 @@
 
 
     <%- include('../modals/events') %>
-        <script src="/javascript/calendar.js"></script>

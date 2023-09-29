@@ -24,6 +24,8 @@ const adminRoute = require('./routes/admin')
 const scheduleRoute = require('./routes/schedule')
 const updatesRoute = require('./routes/updates')
 const sidebarRoute = require('./routes/sidebar')
+const feeRoute = require('./routes/fee')
+const gradeRoute = require('./routes/grade')
 
 
 
@@ -174,6 +176,8 @@ app.use('/', adminRoute);
 app.use('/', scheduleRoute);
 app.use('/', updatesRoute);
 app.use('/', sidebarRoute);
+app.use('/', feeRoute);
+app.use('/', gradeRoute);
 
 
 

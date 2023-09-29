@@ -18,12 +18,7 @@
 
 // datepicker
 
-$(function () {
-    $("#datepicker").datepicker({
-        showButtonPanel: true,
-        show: "blind"
-    });
-});
+
 
 
 // deleting the schedule

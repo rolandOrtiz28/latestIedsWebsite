@@ -30,8 +30,53 @@ $(document).ready(function () {
 
 
 
-// SEARCH
+$(document).on('change', '.student-feeStatus', function () {
+    var studentId = $(this).data('student-id');
+    var feeStatus = $(this).val();
+    console.log(studentId);
+    console.log(feeStatus);
 
+    $.ajax({
+        url: '/students/' + studentId + '/feeUpdate',
+        type: 'PUT',
+        data: { feeStatus: feeStatus },
+        success: function (response) {
+            console.log('Student status updated successfully');
+        },
+        error: function (error) {
+            console.log('Error updating student feeStatus');
+        }
+    });
+});
+$(document).on('change', '.student-feeStatus', function () {
+    var registrationId = $(this).data('student-id');
+    var feeStatus = $(this).val();
+
+    // Store a reference to the current select element for updating the total amount
+    var feeStatusSelect = $(this);
+
+    // Check if the selected fee status is "Paid"
+    if (feeStatus === 'Paid') {
+        // Make an AJAX request to the server to delete the fees and update total amount
+        $.ajax({
+            url: '/registrations/' + registrationId + '/markPaid',
+            type: 'PUT',
+            success: function (response) {
+                console.log('Registration fee marked as Paid successfully');
+
+                // Update the UI to set total amount to zero
+                feeStatusSelect.closest('tr').find('.me-auto').text('$0');
+            },
+            error: function (error) {
+                console.log('Error marking registration fee as Paid');
+            }
+        });
+    }
+    // No need to handle other fee status changes
+});
+
+
+// SEARCH
 
 $(document).ready(function () {
     // Function to perform the search and update the table
@@ -40,11 +85,8 @@ $(document).ready(function () {
     function performSearch() {
         var searchValue = $('#searchInput').val().trim();
 
-
         // Hide all table bodies when there is a search query
-
         $('#approvedTableBody').hide();
-
 
         // Use Ajax to send the search query to the server
         $.ajax({
@@ -53,7 +95,6 @@ $(document).ready(function () {
             data: { search: searchValue },
             success: function (response) {
                 // Clear the results before appending new ones
-
                 $('#approvedTable tbody').empty();
 
                 response.forEach(function (student) {
@@ -67,41 +108,60 @@ $(document).ready(function () {
                     var actionsTd = $('<td>'); // Create a <td> for actions
 
                     var dropdownMenu = $('<li class="nav-item dropdown">\
-                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" role="button" \
-                    data-bs-toggle="dropdown" aria-expanded="false">Update</a>\
-                    <ul class="dropdown-menu dropdown-menu-end">\
-                        <li class="text-center dropdown-item" data-toggle="modal" \
-                            data-target="#studentDetailsModal" \
-                            data-student=\'' + JSON.stringify(student) + '\' \
-                            data-student-id=\'' + student._id + '\' \
-                            style="cursor: pointer;">View Details</li>\
-                        <li class="text-center">\
-                            <form class="d-inline text-center dropdown-item" \
-                                action="/students/' + student._id + '?_method=DELETE" method="post">\
-                                <button style="border: none; background: none;">Delete</button>\
-                            </form>\
-                        </li>\
-                        <li class="text-center">\
-                            <a class="dropdown-item" data-bs-toggle="modal" \
-                                data-bs-target="#updateStudent' + student._id + '" \
-                                data-bs-whatever="@getbootstrap" style="cursor: pointer;">Update</a>\
-                        </li>\
-                    </ul>\
-                </li>');
+                        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" role="button" \
+                        data-bs-toggle="dropdown" aria-expanded="false">Update</a>\
+                        <ul class="dropdown-menu dropdown-menu-end">\
+                            <li class="text-center dropdown-item" data-toggle="modal" \
+                                data-target="#studentDetailsModal" \
+                                data-student=\'' + JSON.stringify(student) + '\' \
+                                data-student-id=\'' + student._id + '\' \
+                                style="cursor: pointer;">View Details</li>\
+                            <li class="text-center">\
+                                <form class="d-inline text-center dropdown-item" \
+                                    action="/students/' + student._id + '?_method=DELETE" method="post">\
+                                    <button style="border: none; background: none;">Delete</button>\
+                                </form>\
+                            </li>\
+                            <li class="text-center">\
+                                <a class="dropdown-item" data-bs-toggle="modal" \
+                                    data-bs-target="#updateStudent' + student._id + '" \
+                                    data-bs-whatever="@getbootstrap" style="cursor: pointer;">Update</a>\
+                            </li>\
+                            <li class="text-center">\
+                                <a class="dropdown-item" data-bs-toggle="modal" \
+                                    data-bs-target="#addFeeModal' + student._id + '" \
+                                    data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Fee</a>\
+                            </li>\
+                            <li class="text-center">\
+                                <a class="dropdown-item" data-bs-toggle="modal" \
+                                    data-bs-target="#addGradeModal' + student._id + '" \
+                                    data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Grade</a>\
+                            </li>\
+                        </ul>\
+                    </li>');
+
+                    // Create a <td> for the fee status select
+                    var feeStatusTd = $('<td>').append('<select class="form-select form-select-sm student-feeStatus"\
+                        aria-label=".form-select-sm example"\
+                        data-student-id="' + student._id + '">\
+                        <option ' + (student.feeStatus === 'Pending' ? 'selected' : '') + ' value="Pending">Pending</option>\
+                        <option ' + (student.feeStatus === 'Paid' ? 'selected' : '') + ' value="Paid">Paid</option>\
+                        <option ' + (student.feeStatus === 'Declined' ? 'selected' : '') + ' value="Declined">Declined</option>\
+                    </select>');
+
+                    // Append the fee status <td> to the row
+                   
 
                     actionsTd.append(dropdownMenu);
                     row.append(actionsTd);
-
-                    // Determine which tab to append the row to based on status
-
+                    row.append(feeStatusTd);
+                    row.append('<td class="me-auto">' + '$' + student.totalAmount + '</td>');
                     $('#approvedTableBody').append(row);
                     $('#approvedTableBody').show();
-
                 });
+
                 if (searchValue === '') {
-
                     $('#approvedTableBody').show();
-
                 }
             },
             error: function (error) {
@@ -113,11 +173,8 @@ $(document).ready(function () {
     $('#searchInput').on('input', function () {
         performSearch();
     });
-
     performSearch();
 });
-
-
 
 
 // MODAL
@@ -177,7 +234,7 @@ $(document).ready(function () {
         const studentData = button.data('student');
 
         showStudentDetails(studentData);
-
+      
     });
 });
 

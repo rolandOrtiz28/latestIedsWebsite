@@ -35,6 +35,28 @@ const registrationSchema = new Schema({
         type: String,
         default: "Pending",
     },
+    feeStatus: {
+        type: String,
+        default: "Pending",
+    },
+    totalAmount: {
+        type: Number,
+        default: 0,
+    },
+    fee: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Fee'
+        }
+
+    ],
+    grade: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Grade'
+        }
+
+    ]
 });
 
 module.exports = mongoose.model('Registration', registrationSchema);

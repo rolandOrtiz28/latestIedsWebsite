@@ -20,9 +20,7 @@
 
 .student-wrapper {
     overflow-y: auto;
-
     max-height: none;
-
     height: calc(100vh - 50px);
 
 }

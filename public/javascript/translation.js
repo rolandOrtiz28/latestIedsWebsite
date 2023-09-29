@@ -12,6 +12,7 @@ i18next.init({
                 hmEvent: "Events",
                 hmCalendar: "School Calendar",
                 statsTitle: "STUDENT STATISTICS",
+                GEProgram: "General English Program",
                 khProgram: "Khmer Education Program",
                 IEProgram: "International English Program",
                 ChineseClasses: "Chinese Language Classes",
@@ -35,10 +36,6 @@ i18next.init({
                 click: "(click here)",
                 computer: "Computer",
                 dayCare: "Day-care",
-<<<<<<< HEAD
-
-=======
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
                 regTitle: "Student registration form",
                 firstName: "First name",
                 lastName: "Last name",
@@ -62,11 +59,6 @@ i18next.init({
                 chineseDescription: "Chinese Language Classes focus on teaching Mandarin Chinese, one of the world's most spoken languages. These classes cater to beginners and those with previous exposure to Chinese, aiming to develop proficiency in speaking, listening, reading, and writing. The curriculum typically covers essential vocabulary, grammar, sentence structures, and cultural insights related to the Chinese-speaking world. This program could benefit students interested in cross-cultural communication, business opportunities, travel, or academic pursuits related to China.",
                 computerDescription: "Computer Programs offer a diverse range of courses aimed at enhancing digital literacy and technical skills. These programs cover topics such as programming, software development, web design, data analysis, and more. Students learn how to effectively use software applications and programming languages, which are valuable skills in today's technology-driven world. Computer programs often cater to individuals looking to pursue careers in IT, software development, data science, and related fields.",
                 dayCareDescription: "Day-care programs provide a nurturing and supportive environment for young children while their parents or guardians are at work or engaged in other activities. These programs ensure the safety, well-being, and early development of children through a combination of play, social interaction, creative activities, and sometimes basic learning experiences. Day-care facilities may include structured routines, supervised playtime, and opportunities for educational exploration, helping children develop social skills and foundational knowledge in a safe setting.",
-<<<<<<< HEAD
-
-=======
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
-
                 agree1: "1. I agree to abide by the rules and regulations of IEDS and the jurisdiction of the laws of Cambodia.",
                 agree2: "2. I understand that although IEDS will provide supervision and care will be taken to prevent accidents from occurring; however, sometimes accidents are unavoidable. In the event of an accident, I authorize IEDS to take appropriate actions for the well-being of my child and shall not hold IEDS liable for such accident(s) and action(s) they take.",
                 agree3: "3. I have read and agreed to abide by the IEDS's payment policy.",
@@ -115,11 +107,8 @@ i18next.init({
                 click: "(ចុច​ទីនេះ)",
                 computer: "កុំព្យូទ័រ",
                 dayCare: "ការថែទាំពេលថ្ងៃ",
-<<<<<<< HEAD
   regTitle: "ទម្រង់ចុះឈ្មោះនិស្សិតងៃ",
-=======
                 regTitle: "ទម្រង់ចុះឈ្មោះនិស្សិតងៃ",
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
                 firstName: "ឈ្មោះដំបូង",
                 lastName: "នាមត្រកូល",
                 Age: "អាយុ",
@@ -143,18 +132,14 @@ i18next.init({
                 chineseDescription: "ថ្នាក់ភាសាចិនផ្តោតសំខាន់លើការបង្រៀនភាសាចិនកុកងឺ ដែលជាភាសាមួយក្នុងចំនោមភាសានិយាយច្រើនជាងគេលើពិភពលោក។ ថ្នាក់ទាំងនេះផ្តល់ជូនសម្រាប់អ្នកចាប់ផ្តើមដំបូង និងអ្នកដែលមានបទពិសោធន៍ភាសាចិនពីមុន ដើម្បីអភិវឌ្ឍជំនាញក្នុងការនិយាយ ការស្តាប់ ការអាន និងការសរសេរ។ កម្មវិធីសិក្សាជាធម្មតាគ្របដណ្តប់វាក្យសព្ទសំខាន់ៗ វេយ្យាករណ៍ រចនាសម្ព័ន្ធប្រយោគ និងការយល់ដឹងអំពីវប្បធម៌ដែលទាក់ទងនឹងពិភពនិយាយភាសាចិន។ កម្មវិធីនេះអាចផ្តល់អត្ថប្រយោជន៍ដល់សិស្សដែលចាប់អារម្មណ៍លើការទំនាក់ទំនងឆ្លងវប្បធម៌ ឱកាសអាជីវកម្ម ការធ្វើដំណើរ ឬការបន្តការសិក្សាទាក់ទងនឹងប្រទេសចិន។",
                 computerDescription: "កម្មវិធីកុំព្យូទ័រផ្តល់ជូននូវវគ្គសិក្សាចម្រុះក្នុងគោលបំណងលើកកំពស់ចំណេះដឹងផ្នែកឌីជីថល និងជំនាញបច្ចេកទេស។ កម្មវិធីទាំងនេះគ្របដណ្តប់លើប្រធានបទដូចជា ការសរសេរកម្មវិធី ការអភិវឌ្ឍន៍កម្មវិធី ការរចនាគេហទំព័រ ការវិភាគទិន្នន័យ និងច្រើនទៀត។ សិស្សរៀនពីរបៀបប្រើប្រាស់កម្មវិធី Software និងភាសាសរសេរកម្មវិធីប្រកបដោយប្រសិទ្ធភាព ដែលជាជំនាញដ៏មានតម្លៃនៅក្នុងពិភពបច្ចេកវិទ្យាដែលជំរុញដោយបច្ចេកវិទ្យានាពេលបច្ចុប្បន្ននេះ។ កម្មវិធីកុំព្យូទ័រ ច្រើនតែផ្តល់ជូនបុគ្គលដែលចង់បន្តអាជីពក្នុងផ្នែក IT ការអភិវឌ្ឍន៍កម្មវិធី វិទ្យាសាស្ត្រទិន្នន័យ និងផ្នែកដែលពាក់ព័ន្ធ។",
                 dayCareDescription: "កម្មវិធីថែទាំពេលថ្ងៃផ្តល់នូវបរិយាកាសចិញ្ចឹមបីបាច់ និងគាំទ្រដល់កុមារតូចៗ ខណៈពេលដែលឪពុកម្តាយ ឬអាណាព្យាបាលរបស់ពួកគេកំពុងធ្វើការ ឬចូលរួមក្នុងសកម្មភាពផ្សេងទៀត។ កម្មវិធីទាំងនេះធានាសុវត្ថិភាព សុខុមាលភាព និងការអភិវឌ្ឍន៍ដំបូងរបស់កុមារ តាមរយៈការរួមបញ្ចូលគ្នានៃការលេង អន្តរកម្មសង្គម សកម្មភាពច្នៃប្រឌិត និងពេលខ្លះបទពិសោធន៍សិក្សាជាមូលដ្ឋាន។ កន្លែងថែទាំពេលថ្ងៃអាចរួមបញ្ចូលនូវទម្លាប់ដែលមានរចនាសម្ព័ន្ធ ពេលវេលាលេងដែលមានការត្រួតពិនិត្យ និងឱកាសសម្រាប់ការរុករកផ្នែកអប់រំ ជួយកុមារអភិវឌ្ឍជំនាញសង្គម និងចំណេះដឹងជាមូលដ្ឋាននៅក្នុងកន្លែងដែលមានសុវត្ថិភាព។",
-
-<<<<<<< HEAD
-=======
-
-                agree1: "១. ខ្ញុំយល់ព្រមធ្វើតាមច្បាប់ និងបទបញ្ញាតិរបស់សាលារៀន អាយ អ៊ី ឌី អេស ហើយអនុលោមទៅតាម ច្បាប់នៃព្រះរាជាណាចក្រកម្ពុជា។",
+               agree1: "១. ខ្ញុំយល់ព្រមធ្វើតាមច្បាប់ និងបទបញ្ញាតិរបស់សាលារៀន អាយ អ៊ី ឌី អេស ហើយអនុលោមទៅតាម ច្បាប់នៃព្រះរាជាណាចក្រកម្ពុជា។",
                 agree2: "២. ខ្ញុំយល់ថា ទោះបីជាសាលាផ្ដល់ការយកចិត្តទុកដាក់ក្នុងការបង្ការគ្រោះថ្នាក់កុំឲ្យកើតមានកំឡុងពេលសិក្សាក៏ដោយ ប៉ុន្ដែពេលខ្លះគ្រោះថ្នាក់គឺមិនអាចជៀសវាងបានទេ។ ប្រសិនបើជាមានគ្រោះថ្នាក់កើតឡើងជាយថាហេតុ ខ្ញុំសូមប្រគល់សិទ្ធិឲ្យសាលាចាត់វិធានការសមស្រប ដើម្បីសុខមាលភាពកូនរបស់ខ្ញុំ ហើយនឹងមិនឲ្យសាលាទទួលខុសត្រូវចំពោះការគ្រោះថ្នាក់នោះឡើយ។",
                 agree3: "៣. ខ្ញុំបានអាន និងយល់ព្រមតាមគោលការណ៍នៃការបង់ប្រាក់របស់សាលា អាយ អ៊ី ឌី អេស។ ",
                 agree4: "៤. ខ្ញុំយល់ថាសាលាមានសិទ្ធិសម្រេចចំពោះការជ្រើសរើសទទួលសិស្សដែលចុះឈ្មោះចូលរៀន។ ",
                 agree5: "៥. ខ្ញុំសូមប្រកាសថា ព័ត៌មានដែលផ្ដល់នៅក្នុងពាក្យស្នើរសុំនេះ ពិតនិងត្រឹមត្រូវ ហើយអាចយល់បាន ម្យ៉ាងទៀតចំពោះការផ្ដល់នូវព័ត៌មានមិនត្រឹមត្រូវ និងជាលទ្ធផលឈានដល់ការដកពាក្យចេញ ឬបញ្ឈប់ពីសាលា ទោះជាបានអនុញ្ញាតឲ្យចូលរៀនហើយក៏ដោយ។",
                 agree6: "៦. ខ្ញុំយល់ច្បាស់ថារូបថត/វីឌីអូកូនរបស់ខ្ញុំនឹងត្រូវបានសាលាប្រើសម្រាប់បោះផ្សាយ រឺប្រើទៅលើប្រព័ន្ធអេឡិចត្រូនិច ដើម្បីបង្ហាញជាសាធារណៈ។ ",
                 reminder: "(សូមប្រាកដថាត្រូវធីកប្រអប់មុនពេលចុចប៊ូតុង)",
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
+
             }
         }
     }
@@ -336,10 +321,6 @@ function updateContent() {
     dayCareElements.forEach(function (element) {
         element.textContent = i18next.t('translation:dayCare');
     });
-<<<<<<< HEAD
-
-=======
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
     regTitleElements.forEach(function (element) {
         element.textContent = i18next.t('translation:regTitle');
     });
@@ -388,10 +369,6 @@ function updateContent() {
     phoneNumberElements.forEach(function (element) {
         element.textContent = i18next.t('translation:phone');
     });
-<<<<<<< HEAD
-
-=======
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
     khmerDescriptionElements.forEach(function (element) {
         element.textContent = i18next.t('translation:khmerDescription');
     });
@@ -410,10 +387,6 @@ function updateContent() {
     dayCareDescriptionElements.forEach(function (element) {
         element.textContent = i18next.t('translation:dayCareDescription');
     });
-
-
-<<<<<<< HEAD
-=======
     agree1Elements.forEach(function (element) {
         element.textContent = i18next.t('translation:agree1');
     });
@@ -435,7 +408,6 @@ function updateContent() {
     reminderElements.forEach(function (element) {
         element.textContent = i18next.t('translation:reminder');
     });
->>>>>>> dd26fca78d3addbc38ff8e55a692813f9c143ac8
 
 }
 

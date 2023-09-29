@@ -1,5 +1,6 @@
 <% layout('/layouts/adminboilerplate') -%>
     <link rel="stylesheet" href="/stylesheet/admin.css">
+    <link rel="stylesheet" href="/stylesheet/stars.css">
 
     <div class="container">
 
@@ -34,7 +35,7 @@
                                     <th scope="col">Student #</th>
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Curriculum</th>
-                                    <th scope="col">Grade</th>
+                                    <th scope="col">Year Level</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Actions</th>
 
@@ -134,9 +135,11 @@
                                     <th scope="col">Student #</th>
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Curriculum</th>
-                                    <th scope="col">Grade</th>
+                                    <th scope="col">Year Level</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Actions</th>
+                                    <th scope="col">Fee Status</th>
+                                    <th scope="col">Remaining Balance</th>
                                 </tr>
                             </thead>
                             <% for(let student of students){ %>
@@ -158,10 +161,12 @@
                                             <td>
                                                 <%= student.yearLevel%>
                                             </td>
+                                            
                                             <td style="background-color: rgb(0, 179, 0);color: white;"
                                                 class="text-center">
                                                 <%= student.status %>
                                             </td>
+                                            
                                             <td>
                                                 <li class="nav-item dropdown">
                                                     <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
@@ -196,15 +201,48 @@
                                                                 style="cursor: pointer;">
                                                                 Update</a>
                                                         </li>
+                                                        <li class="text-center">
+                                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                            data-bs-target="#addFeeModal<%= student._id %>"
+                                                                data-bs-whatever="@getbootstrap"
+                                                                style="cursor: pointer;">
+                                                                Add Fee</a>
+                                                        </li> 
+                                                        <li class="text-center">
+                                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                            data-bs-target="#addGradeModal<%= student._id %>"
+                                                                data-bs-whatever="@getbootstrap"
+                                                                style="cursor: pointer;">
+                                                                Add Grade</a>
+                                                        </li> 
 
                                                     </ul>
                                                 </li>
 
                                             </td>
+                                            <td class="me-auto">
+<%=student.totalAmount%>
+
+                                            </td>
+                                            
+                                            <td>
+                                                <select class="form-select form-select-sm student-feeStatus"
+                                                    aria-label=".form-select-sm example"
+                                                    data-student-id="<%= student._id %>">
+                                                    <option <%=student.feeStatus==='Pending' ? 'selected' : '' %>
+                                                        value="Pending">Pending</option>
+                                                    <option <%=student.feeStatus==='Approved' ? 'selected' : '' %>
+                                                        value="Approved">Paid</option>
+                                                    <option <%=student.feeStatus==='Declined' ? 'selected' : '' %>
+                                                        value="Declined">Declined</option>
+                                                </select>
+                                            </td>
+                                           
                                         </tr>
 
                                     </tbody>
-
+                                  
+                               
                                     <% } %>
                                         <% } %>
                         </table>
@@ -222,7 +260,7 @@
                                     <th scope="col">Student #</th>
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Curriculum</th>
-                                    <th scope="col">Grade</th>
+                                    <th scope="col">Year Level</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Edit</th>
                                 </tr>

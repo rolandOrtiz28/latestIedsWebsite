@@ -7,6 +7,7 @@ const Admin = require('../model/admin')
 const Update = require('../model/updates')
 const nodemailer = require('nodemailer')
 const Registration = require('../model/registration')
+const Fee = require('../model/fee')
 const moment = require('moment')
 const Schedule = require('../model/schedule')
 const { isLoggedIn } = require('../middleware')
@@ -89,7 +90,7 @@ router.get('/logout', (req, res, next) => {
 // Students
 router.get('/admin/students', isLoggedIn, catchAsync(async (req, res) => {
     try {
-        const students = await Registration.find({});
+        const students = await Registration.find({}).populate('fee');
 
         res.render('admin/studentdashboard', { students });
     } catch (error) {
@@ -134,7 +135,7 @@ router.get('/admin/students/search', isLoggedIn, catchAsync(async (req, res) => 
 
 router.get('/admin/students/:id', isLoggedIn, async (req, res) => {
     try {
-        const student = await Registration.findById(req.params.id);
+        const student = await Registration.findById(req.params.id).populate('fee');
 
         res.render('admin/studentdashboard', { student })
     } catch (error) {
@@ -187,6 +188,23 @@ router.put('/students/:id/update', catchAsync(async (req, res) => {
     }
 }));
 
+router.put('/students/:id/feeUpdate', catchAsync(async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { feeStatus } = req.body;
+
+        // Update the student's feeStatus in the database
+        const updatedStudent = await Registration.findByIdAndUpdate(id, { feeStatus }, { new: true });
+
+        res.json({ success: true, feeStatus: updatedStudent.feeStatus, studentId: updatedStudent._id });
+
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ success: false });
+    }
+}));
+
+
 router.delete('/students/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Registration.findByIdAndDelete(id);
@@ -194,6 +212,56 @@ router.delete('/students/:id', catchAsync(async (req, res) => {
     res.redirect('/admin/students');
 }))
 
+router.put('/registrations/:registrationId/markPaid', async (req, res) => {
+    const registrationId = req.params.registrationId;
+
+    try {
+        // Find the registration by ID
+        const registration = await Registration.findById(registrationId);
+console.log(registration)
+        if (!registration) {
+            return res.status(404).json({ message: 'Registration not found' });
+        }
+
+        // Check if the feeStatus is already "Paid" (to avoid unnecessary updates)
+        if (registration.feeStatus !== 'Paid') {
+            // Set the feeStatus to "Paid"
+            registration.feeStatus = 'Paid';
+
+            // Clear the fee array (assuming you want to delete all fee records)
+            registration.fee = [];
+
+            // Set the total amount to zero
+            registration.totalAmount = 0;
+
+            // Save the updated registration record
+            await registration.save();
+
+            return res.status(200).json({ message: 'Fee marked as Paid and total amount updated' });
+        } else {
+            return res.status(200).json({ message: 'Fee is already marked as Paid' });
+        }
+    } catch (error) {
+        console.error('Error marking fee as Paid:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Update Fee
+router.put('/fees/:id//update', catchAsync(async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const fees = await Fee.findByIdAndUpdate(id, { status }, { new: true });
+
+        res.json({ success: true, status: fees.status, studentId: fees._id });
+
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ success: false });
+    }
+}));
 
 
 // SCHOOL CALENDAR

@@ -13,6 +13,7 @@
 
 <body>
     <div class="sidebar bg-primary" id="sidebar">
+    
         <div class="input-group mt-3 p-2">
             <div class="form-outline">
                 <input type="search" id="form1" class="form-control" style="width: 180px;" onkeyup="search()" />
@@ -33,13 +34,12 @@
                                     <img src="/images/logo.png" alt="Default Image" style="width: 50px; height: 50px;">
                                     <% } %>
                                         <h6>
-                                            <% if (sidebarStudent) { %>
-                                                <a href="#" class="studentLink"
-                                                    data-studentnumber="<%= sidebarStudent.student.studentNumber %>">
-                                                    <%= sidebarStudent.student.firstName %>
-                                                        <%= sidebarStudent.student.lastName %>
-                                                </a>
-                                                <% } %>
+                                            
+                                            <a href="/sidebar/security/<%= student._id %>" class="studentLink">
+                                                <%= student.student.firstName %>
+                                                <%= student.student.lastName %>
+                                            </a>
+                                              
                                         </h6> - <%= student.yearLevel %>
                         </li>
                     </ul>
@@ -49,63 +49,11 @@
     </div>
 
 
-    <!-- Modal for Student Number Input -->
-    <div class="modal fade" id="studentNumberModal" tabindex="-1" role="dialog"
-        aria-labelledby="studentNumberModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="studentNumberModalLabel">Enter Student Number</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="studentNumberForm">
-                        <div class="form-group">
-                            <label for="studentNumber">Student Number</label>
-                            <input type="text" class="form-control" id="studentNumber" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 
 
-    <script>
-        // Show the modal when a link with the "studentLink" class is clicked
-        $('.studentLink').click(function (e) {
-            e.preventDefault(); // Prevent the default link behavior
-            var studentNumber = $(this).data('studentnumber'); // Get the student number from data attribute
-            $('#studentNumberModal').modal('show'); // Show the modal
-            $('#studentNumber').data('expectednumber', studentNumber); // Store the expected student number in a data attribute
-        });
-
-        // Handle form submission
-        $('#studentNumberForm').submit(function (e) {
-            e.preventDefault(); // Prevent the form from submitting
-
-            // Get the entered student number
-            var enteredStudentNumber = $('#studentNumber').val();
-            var expectedStudentNumber = $('#studentNumber').data('expectednumber'); // Get the expected student number
-
-            // Check if the entered student number matches the expected student number
-            if (enteredStudentNumber === expectedStudentNumber) {
-                // Redirect to the student's page if the student number is correct
-                window.location.href = "/student/<%= student._id %>";
-            } else {
-                // Show an error message or take appropriate action for incorrect student number
-                alert("Incorrect Student Number. Please try again.");
-            }
-
-            // Close the modal
-            $('#studentNumberModal').modal('hide');
-        });
-    </script>
-
+  
 
 
     <!-- Include Bootstrap 5 JavaScript and Popper.js -->
