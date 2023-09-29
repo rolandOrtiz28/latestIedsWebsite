@@ -5,6 +5,7 @@ const Registration = require('../model/registration');
 
 
 router.get('/registrationform', catchAsync(async (req, res) => {
+    
     req.session.registrationData = {
         student: {},
         parents: {},
@@ -41,6 +42,7 @@ router.get('/pending', async (req, res) => {
 });
 
 router.post('/student', catchAsync(async (req, res) => {
+   
     const { firstName, lastName, age, address, gender, birthday } = req.body;
     // Set the studentNumber before restructuring
     const year = new Date().getFullYear();
