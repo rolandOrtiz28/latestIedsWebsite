@@ -181,8 +181,7 @@ const frameSrcUrls=[
                     "https://img.icons8.com/ios-glyphs/256/phone-disconnected.png",
                     "https://source.unsplash.com/collection/10623559",
                     "https://source.unsplash.com/collection/8657917",
-                    "https://www.paypalobjects.com/js-sdk-logos/2.2.7/paypal-blue.svg",
-                    "https://www.paypalobjects.com/js-sdk-logos/2.2.7/card-black.svg",
+
                     "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp",
                     "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/images/ui-icons_444444_256x240.png",
     
