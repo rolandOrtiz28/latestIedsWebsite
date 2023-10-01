@@ -44,7 +44,7 @@ db.once("open", () => {
 const secret = process.env.SESSION_SECRET
 
 const sessionConfig = {
-    secret: secret,
+    secret: "ieds2023",
     name: '_rolandOrtiz',
     resave: false,
     saveUninitialized: true,
