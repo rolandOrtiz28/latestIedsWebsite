@@ -20,19 +20,20 @@
                     <div class="card card-registration my-4 h-50" style="box-shadow: 10px 5px 5px rgb(0, 179, 255);">
                         <div class="row g-0">
                             <div class="col-xl-6 d-none d-xl-block">
-                                <img src="/images/reg.png" alt="Sample photo" class="img-fluid"
+                                <img src="/images/thumbnail.png" alt="Sample photo" class="img-fluid"
                                     style="border-radius: .25rem 1rem 1rem .25rem; width: 900px; height: 1100px;" />
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Curriculum</h3>
+                                   
                                     <form action="/curriculum" method="POST" class="needs-validation" novalidate>
                                         <div class="wrapper">
                                             <div class="row">
                                                 <div class="col-md-6 mb-4">
+                                                    <h5 class="mb-2 text-uppercase">Curriculum</h5>
                                                     <select class="form-select" aria-label="Disabled select example"
-                                                        name="curriculum" required>
-                                                        <option selected disabled>Curriculum</option>
+                                                        name="curriculum" required="true">
+                                                        <option value="" selected disabled>Select a Curriculum</option>
                                                         <option value="Khmer Education Program">Khmer Education Program
                                                         </option>
                                                         <option value="International English Program">International
@@ -53,9 +54,10 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-6 mb-4">
+                                                    <h5 class="mb-2 text-uppercase">Year Level</h5>
                                                     <select class="form-select" aria-label="Disabled select example"
-                                                        name="yearLevel" required>
-                                                        <option selected disabled>Year Level</option>
+                                                        name="yearLevel" required="true">
+                                                        <option value="" selected disabled>Select a Year Level</option>
                                                         <option value="Level 1">Level 1
                                                         </option>
                                                         <option value="Level 2">Level 2</option>
@@ -148,52 +150,58 @@
 
     <script src="/javascript/validation.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get all the checkboxes
-            const checkboxes = document.querySelectorAll(".form-check-input");
+   <!-- ... previous code ... -->
 
-            // Get the Register button
-            const registerButton = document.querySelector(".btn-primary");
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get all the checkboxes
+        const checkboxes = document.querySelectorAll(".form-check-input");
 
-            // Get the curriculum and year level select elements
-            const curriculumSelect = document.querySelector("select[name='curriculum']");
-            const yearLevelSelect = document.querySelector("select[name='yearLevel']");
+        // Get the Register button
+        const registerButton = document.querySelector(".btn-primary");
 
-            // Function to check if all checkboxes are checked
-            function areAllCheckboxesChecked() {
-                for (const checkbox of checkboxes) {
-                    if (!checkbox.checked) {
-                        return false;
-                    }
-                }
-                return true;
-            }
+        // Get the curriculum and year level select elements
+        const curriculumSelect = document.querySelector("select[name='curriculum']");
+        const yearLevelSelect = document.querySelector("select[name='yearLevel']");
 
-            // Function to enable/disable the Register button
-            function updateRegisterButton() {
-                if (curriculumSelect.value !== "" && yearLevelSelect.value !== "" && areAllCheckboxesChecked()) {
-                    registerButton.removeAttribute("disabled");
-                } else {
-                    registerButton.setAttribute("disabled", "disabled");
+        // Function to check if all checkboxes are checked
+        function areAllCheckboxesChecked() {
+            for (const checkbox of checkboxes) {
+                if (!checkbox.checked) {
+                    return false;
                 }
             }
+            return true;
+        }
 
-            // Add event listeners to the checkboxes
-            checkboxes.forEach((checkbox) => {
-                checkbox.addEventListener("change", updateRegisterButton);
-            });
+        // Function to enable/disable the Register button
+        function updateRegisterButton() {
+            if (curriculumSelect.value !== "" && yearLevelSelect.value !== "" && areAllCheckboxesChecked()) {
+                registerButton.removeAttribute("disabled");
+            } else {
+                registerButton.setAttribute("disabled", "disabled");
+            }
+        }
 
-            // Handle form submission
-            const form = document.querySelector("form");
-            form.addEventListener("submit", function (event) {
-                if (curriculumSelect.value === "" || yearLevelSelect.value === "" || !areAllCheckboxesChecked()) {
-                    event.preventDefault(); // Prevent form submission if criteria not met
-                    alert("Please select both Curriculum and Year Level, and agree to all terms.");
-                }
-            });
-
-            // Initial check
-            updateRegisterButton();
+        // Add event listeners to the checkboxes
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", updateRegisterButton);
         });
-    </script>
+
+        // Add event listeners to the select elements
+        curriculumSelect.addEventListener("change", updateRegisterButton);
+        yearLevelSelect.addEventListener("change", updateRegisterButton);
+
+        // Handle form submission
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function (event) {
+            if (curriculumSelect.value === "" || yearLevelSelect.value === "" || !areAllCheckboxesChecked()) {
+                event.preventDefault(); // Prevent form submission if criteria not met
+                alert("Please select both Curriculum and Year Level, and agree to all terms.");
+            }
+        });
+
+        // Initial check
+        updateRegisterButton();
+    });
+</script>
