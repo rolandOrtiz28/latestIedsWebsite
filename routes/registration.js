@@ -42,7 +42,7 @@ router.get('/pending', async (req, res) => {
 });
 
 router.post('/student', catchAsync(async (req, res) => {
-   
+   await Registration.deleteMany({})
     const { firstName, lastName, age, address, gender, birthday } = req.body;
     // Set the studentNumber before restructuring
     const year = new Date().getFullYear();
