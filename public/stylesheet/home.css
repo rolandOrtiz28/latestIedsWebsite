@@ -6,9 +6,7 @@
 
 .carousel-item img {
   width: 100%;
-  /* Use 100% width to make images responsive */
   height: auto;
-  /* Automatically adjust height to maintain aspect ratio */
 }
 
 .container-box {
@@ -176,10 +174,9 @@
 
 .logo2 img {
   color: #ffcd93;
-  width: 700px;
+  width: 80%;
   height: 450px;
-  /* perspective: 250px;
-  transform: rotateX(0deg) rotateY(40deg) rotateZ(0deg) skewX(-10deg) translateX(220px) translateY(25px) ; */
+ 
   transform: perspective(1000px)rotateY(25deg)rotateX(0deg)rotateZ(-2deg);
   position: relative;
   left: 100px;
