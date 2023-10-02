@@ -27,7 +27,7 @@ router.get('/adminlogin', (req, res) => {
 
 
 router.post('/register', catchAsync(async (req, res) => {
-    await Admin.deleteMany({})
+
     try {
         const { email, username, password } = req.body;
 
