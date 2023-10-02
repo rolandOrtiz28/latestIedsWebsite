@@ -90,14 +90,12 @@
                                                         </li>
 
                                                         <li class="text-center">
-                                                            <% if(currentUser){ %>
-                                                                <form class="d-inline text-center dropdown-item"
-                                                                    action="/students/<%=student._id%>?_method=DELETE"
-                                                                    method="post">
-                                                                    <button
-                                                                        style="border: none; background: none;">Delete</button>
-                                                                </form>
-                                                                <% } %>
+                                                            <form class="d-inline text-center dropdown-item"
+                                                                action="/students/<%=student._id%>?_method=DELETE"
+                                                                method="post">
+                                                                <button
+                                                                    style="border: none; background: none;">Delete</button>
+                                                            </form>
                                                         </li>
                                                         <li class="text-center">
                                                             <a class="dropdown-item" data-bs-toggle="modal"
