@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'PMST',
+        folder: 'IEDS',
         allowed_formats: ['jpeg', 'png', 'jpg'],
         quality: 80,
         maxFileSize: 100000000

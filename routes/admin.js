@@ -35,23 +35,23 @@ router.post('/register', catchAsync(async (req, res) => {
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         if (!passwordRegex.test(password)) {
             req.flash('error', 'Password must contain at least one uppercase letter, one digit, and be at least 8 characters long');
-            res.redirect('/register');
+            res.redirect('/adminregister');
             return;
         }
         const existingUsername = await Admin.findOne({ username })
         if (existingUsername) {
             req.flash('error', 'A user with the given username is already registered')
-            return res.redirect('/register')
+            return res.redirect('/adminregister')
         }
         const existingEmail = await Admin.findOne({ email })
         if (existingEmail) {
             req.flash('error', 'A user with the given email is already registered')
-            return res.redirect('/register')
+            return res.redirect('/adminregister')
         }
         const confirmPassword = req.body['confirm-password'];
         if (password !== confirmPassword) {
             req.flash('error', 'Password do not match');
-            return res.redirect('/register');
+            return res.redirect('/adminregister');
         } else {
             const admin = new Admin({ email, username });
             const registeredUser = await Admin.register(admin, password);

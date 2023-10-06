@@ -11,9 +11,13 @@
     <script src="https://kit.fontawesome.com/00e4d50ddc.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body>    
     <%- include('../partials/flash') %>
+   <div class="container d-flex justify-content-center align-items-center">
+    <div class="row">
+
         <form class="form validated-form" action="/login" method="POST" novalidate>
+            
             <p class="form-title">Please sign in your account</p>
             <div class="input-container">
                 <input placeholder="Enter username" type="username" name="username">
@@ -32,8 +36,8 @@
             </button>
 
         </form>
-
-
+    </div>
+    </div>
 
 
         <script>

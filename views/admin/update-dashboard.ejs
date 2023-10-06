@@ -45,8 +45,13 @@
                                         <%= update.subDescription%>
                                     </td>
                                     <td>
-                                        <img src="<%= update.images[0].url%>" alt="">
-                                    </td>
+                                        <% if (update.images && update.images.length > 0) { %>
+                                          <img src="<%= update.images[0].url %>" alt="">
+                                        <% } else { %>
+                                          <!-- Handle the case when there are no images or update.images is undefined -->
+                                          <p>No image available</p>
+                                        <% } %>
+                                      </td>
                                     <td>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#"

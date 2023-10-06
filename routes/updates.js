@@ -50,11 +50,11 @@ router.post('/newUpdates', upload.array('image'), catchAsync(async (req, res) =>
         const update = new Update(req.body.update);
         update.images = req.files.map(i => ({ url: i.path, filename: i.filename }));
         const saveupdate = update.save();
-        console.log(saveupdate)
+
         // Wait for the update to be saved, then redirect
         await saveupdate;
         req.flash('success', "Successfully added a new Update")
-        res.redirect('/updates');
+        res.redirect('/updates-dashboard');
     } catch (err) {
         console.log(err.message);
         res.redirect('/');

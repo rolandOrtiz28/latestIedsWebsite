@@ -13,6 +13,7 @@
                     type="button" role="tab" aria-controls="nav-Approved" aria-selected="false">Approved</button>
                 <button class="nav-link" id="nav-Declined-tab" data-bs-toggle="tab" data-bs-target="#nav-Declined"
                     type="button" role="tab" aria-controls="nav-Declined" aria-selected="false">Declined</button>
+                    
                 <div id="searchBarContainer" class="input-group rounded w-25 ms-auto" style="display: none;">
                     <input type="text" class="form-control rounded" id="searchInput" placeholder="Search"
                         aria-label="Search" aria-describedby="search-addon" />
@@ -20,6 +21,7 @@
                         <button id="searchButton" class="" style="border: none;"><i class="fas fa-search"></i></button>
                     </span>
                 </div>
+                
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -128,6 +130,11 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="approvedTable" width="100%" cellspacing="0">
                             <h1 class="h1">Approved Students</h1>
+                           
+                                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#createModal">
+                                   Add new Student
+                                  </button>
+                                
                             <thead>
                                 <tr>
                                     <th scope="col">Student #</th>
@@ -347,7 +354,7 @@
     <%- include('../modals/student') %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="/javascript/studentadmin.js"></script>
-
+        <script src="/javascript/validation.js"></script>
 
 
 

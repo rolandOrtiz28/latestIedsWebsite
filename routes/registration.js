@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require('../utils/CatchAsync')
 const Registration = require('../model/registration');
-
+const { isLoggedIn } = require('../middleware')
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage })
+const { cloudinary } = require('../cloudinary');
 
 router.get('/registrationform', catchAsync(async (req, res) => {
     
@@ -40,32 +44,41 @@ router.get('/pending', async (req, res) => {
         res.status(500).send('An error occurred');
     }
 });
-
 router.post('/student', catchAsync(async (req, res) => {
-   await Registration.deleteMany({})
+
     const { firstName, lastName, age, address, gender, birthday } = req.body;
-    // Set the studentNumber before restructuring
-    const year = new Date().getFullYear();
-    const studentCount = await Registration.countDocuments({ studentNumber: { $regex: `^${year}` } });
-    const formattedCount = (studentCount + 1).toString().padStart(4, '0');
-    req.session.registrationData.studentNumber = `IEDS${year}-${formattedCount}`;
+
+    // Generate a random 5-digit student ID
+    const studentId = generateRandomStudentId(5);
+
+    req.session.registrationData.studentNumber = studentId;
 
     req.session.registrationData.student = {
-        studentNumber: req.session.registrationData.studentNumber,
+        studentNumber: studentId,
         firstName,
         lastName,
         age,
         address,
         gender,
         birthday,
-        yearLevel: req.session.registrationData.yearLevel, // Add yearLevel here
+        yearLevel: req.session.registrationData.yearLevel,
     };
 
     res.redirect('/registrationformparentsinfo');
-
 }));
 
+// Function to generate a random student ID with the specified length
+function generateRandomStudentId(length) {
+    const characters = '0123456789';
+    let studentId = '';
 
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        studentId += characters.charAt(randomIndex);
+    }
+
+    return `#${studentId}`;
+}
 
 router.post('/parents', (req, res) => {
     const { fatherName, motherName, fatherOccupation, motherOccupation, phoneNumber } = req.body;
@@ -96,6 +109,51 @@ router.post('/curriculum', async (req, res) => {
 });
 
 
+router.post('/adminStudent', upload.array('image'), catchAsync(async (req, res) => {
+    // Generate a random 5-digit student ID
+    const studentId = generateRandomStudentId(5);
+
+    const studentData = {
+        student: {
+            studentNumber: studentId,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            age: req.body.age,
+            address: req.body.address,
+            gender: req.body.gender,
+            birthday: req.body.birthday
+        },
+        parents: {
+            fatherName: req.body.fatherName,
+            motherName: req.body.motherName,
+            motherOccupation: req.body.motherOccupation,
+            fatherOccupation: req.body.fatherOccupation,
+            phoneNumber: req.body.phoneNumber
+        },
+        curriculum: req.body.curriculum,
+        yearLevel: req.body.yearLevel,
+        status: req.body.status // Added status field
+    };
+
+    const student = new Registration(studentData);
+    student.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    await student.save();
+    req.flash('success', 'Student added')
+    res.redirect(`/admin/students`);
+}));
+
+// Function to generate a random student ID with the specified length
+function generateRandomStudentId(length) {
+    const characters = '0123456789';
+    let studentId = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        studentId += characters.charAt(randomIndex);
+    }
+
+    return `#${studentId}`;
+}
 
 
 

@@ -12,8 +12,18 @@
                 <div class="main-content">
                     <% if (latestUpdate) { %>
                     <div class="card" style="width: 20rem;">
-                        <img src="<%= latestUpdate.images[0].url %>" class="card-img-top" alt="...">
+                     
+                        <% if (latestUpdate && latestUpdate.images && latestUpdate.images.length > 0) { %>
+                            <div class="card" style="width: 20rem;">
+                              <img src="<%= latestUpdate.images[0].url %>" class="card-img-top" alt="...">
+                              <!-- Remove the duplicate title here -->
+                            </div>
+                          <% } else { %>
+                         
+                            <p>No image available</p>
+                          <% } %>
                         <div class="card-body">
+                            <!-- Keep this title -->
                             <h3 class="card-title">
                                 <%= latestUpdate.title %>
                             </h3>
@@ -31,6 +41,7 @@
                     <% } %>
                 </div>
             </div>
+            
 
             <!-- Previous Updates Section -->
             <div class="col-md-9 previous-updates">
@@ -39,7 +50,11 @@
                     <% for(let update of previousUpdates ){ %>
                     <a href="/updates/<%=update._id%>">
                         <div class="card2">
-                            <img src="<%= update.images[0].url %>" class="card-img-top img-fluid" alt="...">
+                            <% if (update.images && update.images.length > 0) { %>
+                                <img src="<%= update.images[0].url %>" class="card-img-top img-fluid" alt="...">
+                            <% } else { %>
+                                <img src="/placeholder-image.jpg" class="card-img-top img-fluid" alt="Placeholder Image">
+                            <% } %>
                             <div class="card__content">
                                 <p class="card__title">
                                     <%= update.title %>
@@ -59,3 +74,4 @@
         </div>
     </div>
 </div>
+
