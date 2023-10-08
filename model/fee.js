@@ -8,6 +8,10 @@ const feeSchema = new Schema({
         type: String,
         default: "Pending",
     },
-});
+    createdAt: {
+        type: Date,
+        default: Date.now, // This sets the default value to the current date and time
+    },
+}, { timestamps: true });
 
 module.exports = mongoose.model("Fee", feeSchema);

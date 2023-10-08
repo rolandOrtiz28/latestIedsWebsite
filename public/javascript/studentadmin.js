@@ -137,6 +137,9 @@ $(document).ready(function () {
                                     data-bs-target="#addGradeModal' + student._id + '" \
                                     data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Grade</a>\
                             </li>\
+                            <li class="text-center">\
+                            <a href="/payment/ ' + student._id + '">Payment Info</a>\
+                            </li>\
                         </ul>\
                     </li>');
 

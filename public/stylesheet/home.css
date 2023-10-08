@@ -191,77 +191,11 @@
 
 
 /* Statistics */
-.stats {
-  width: 100%;
-  height: 50vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-image: linear-gradient(rgba(255, 255, 255, .6), rgba(255, 255, 255, .6)), url('/images/pic6.jpg');
-  /* Add your image path here */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  padding: 10rem;
-  margin-bottom: 2rem;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-.stats-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.stats-container .stat-box {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.stat-box h1 {
-  font-size: 80px;
-  color: #3a86ff;
-}
-
-.stat-box p {
-  font-size: 20px;
-  color: #3a86ff;
-}
-
-@keyframes countAnimation {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate {
-  animation: countAnimation 1s ease-in-out forwards;
-}
-
-.stats h1 {
-  color: rgb(58, 134, 255);
-  margin-top: 2rem;
-  font-size: 70px;
-
-}
 
 .map {
   width: 100%;
   height: 70vh;
-  margin-bottom: 3rem;
+  /* margin: 1rem 0 1rem 0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -324,7 +258,7 @@
   width: 100%;
   height: 100vh;
   font-family: 'Ubuntu', sans-serif;
-  margin-bottom: 2rem;
+  margin: 1rem 0 0 0;
 }
 
 .contact .info {

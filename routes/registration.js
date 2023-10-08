@@ -77,7 +77,7 @@ function generateRandomStudentId(length) {
         studentId += characters.charAt(randomIndex);
     }
 
-    return `#${studentId}`;
+    return `#IEDS${studentId}`;
 }
 
 router.post('/parents', (req, res) => {

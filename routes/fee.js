@@ -5,7 +5,6 @@ const Registration = require('../model/registration');
 const Fee = require('../model/fee')
 
 
-
 router.post('/admin/students/:studentId/fees', catchAsync(async (req, res) => {
     try {
         const { studentId } = req.params;
@@ -20,17 +19,20 @@ router.post('/admin/students/:studentId/fees', catchAsync(async (req, res) => {
             return res.redirect('/admin/students');
         }
 
+        // Parse the amount as a number
+        const feeAmount = parseFloat(amount);
+
         // Create a new fee
-        const fee = new Fee({ description, amount });
+        const fee = new Fee({ description, amount: feeAmount });
 
         // Push the fee to the student's fees array
         student.fee.push(fee);
 
-        // Update the totalAmount
-        student.totalAmount += amount; // Add the new fee amount to the totalAmount
-
+        // Update the totalAmount by adding the fee amount
+        student.totalAmount += feeAmount;
 
         student.feeStatus = 'Pending';
+
         // Save the fee and the student
         await fee.save();
         await student.save();
@@ -44,6 +46,7 @@ router.post('/admin/students/:studentId/fees', catchAsync(async (req, res) => {
         res.redirect('/admin/students');
     }
 }));
+
 
 
 router.delete('/:feeId', catchAsync(async(req,res)=>{

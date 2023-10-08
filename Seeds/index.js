@@ -18,7 +18,7 @@ db.once("open", () => {
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async (seedData) => {
-
+await Registration.deleteMany({})
     for (let i = 0; i < 100; i++) {
 
 
@@ -41,7 +41,8 @@ const seedDB = async (seedData) => {
                 phoneNumber: productData.parents.studentNumber,
             },
             curriculum: productData.curriculum,
-            yearLevel: productData.yearLevel
+            yearLevel: productData.yearLevel,
+            status:productData.status
         });
         await prod.save();
     }

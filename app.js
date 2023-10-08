@@ -26,13 +26,14 @@ const updatesRoute = require('./routes/updates')
 const sidebarRoute = require('./routes/sidebar')
 const feeRoute = require('./routes/fee')
 const gradeRoute = require('./routes/grade')
+const paymentRoute = require('./routes/payment')
 
 
 
 const cors = require('cors');
 const { assert } = require('console');
 
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/iedsinternationalschool'
+const dbUrl =  process.env.DB_URL || 'mongodb://127.0.0.1:27017/iedsinternationalschool'
 
 
 mongoose.connect(dbUrl, {});
@@ -309,6 +310,7 @@ app.use('/', updatesRoute);
 app.use('/', sidebarRoute);
 app.use('/', feeRoute);
 app.use('/', gradeRoute);
+app.use('/', paymentRoute);
 
 
 

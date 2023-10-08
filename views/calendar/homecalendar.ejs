@@ -16,7 +16,51 @@
             width: 100%;
             margin-bottom: 4rem;
         }
+        @media print {
+  /* Set the page size and margins */
+  @page {
+    size: auto;
+    margin: 0;
+  }
+
+  body * {
+    visibility: hidden;
+    margin: 0;
+  }
+
+  #printable-content, #printable-content * {
+    visibility: visible;
+    page-break-inside: avoid;
+    margin-top: 2rem;
+ 
+    
+  }
+
+  #calendar{
+width: 100%;
+    overflow: visible !important; 
+        float:none !important;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        display:block !important;
+        height:auto !important;
+     margin-left: 10rem;
+     text-align: center;
+  }
+
+  /* Reduce font size for calendar cells */
+  .calendar td {
+    font-size: 10px; /* Adjust as needed */
+  }
+
+  /* Reduce padding or margins if necessary */
+  .calendar td {
+    padding: 2px; /* Adjust as needed */
+  }
+}
     </style>
+    
 
     <section class="main-calendar">
 
@@ -24,9 +68,11 @@
 
         <div class="container dash-content ">
 
+    <button id="print-button" class="btn btn-primary mb-4">Print Calendar</button>
+    <div id="printable-content">
             <div class="container">
-                <h1 class="text-center text-capitalize">School Calendar</h1>
-
+                <h1 class="text-center text-capitalize" id="calendar">School Calendar</h1>
+       
                 <ul class="nav nav-tabs">
 
                     <li class="nav-item">
@@ -40,7 +86,8 @@
                     </li>
 
                 </ul>
-                <div class="tab-content">
+              
+                <div class="tab-content" id="calendar">
                     <div class="tab-pane fade <%= isMonthActive ? 'show active' : '' %>" id="month" role="tabpanel"
                         aria-labelledby="month-tab">
                         <div class="row">
@@ -182,7 +229,18 @@
                 </div>
             </div>
         </div>
-
+     
+</div>
 
 
     </section>
+
+    <script>
+  const pritnBtn =  document.getElementById('print-button');
+  
+
+  pritnBtn.addEventListener('click', function(){
+print();
+
+  })
+</script>

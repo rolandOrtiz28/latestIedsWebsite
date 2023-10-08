@@ -15,6 +15,8 @@ const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage })
 const { cloudinary } = require('../cloudinary');
+const Chart = require('chart.js'); // Import Chart.js
+
 
 // Authentication Section
 router.get('/adminregister', (req, res) => {
@@ -377,5 +379,85 @@ router.delete('/updates/:id', catchAsync(async (req, res) => {
     await Update.findByIdAndDelete(id);
     res.redirect('/updates-dashboard');
 }))
+
+// Stat
+
+router.get('/analytics', catchAsync(async (req, res) => {
+    try {
+      
+      const fees = await Fee.find({});
+      const totalSales = fees.reduce((total, fee) => total + fee.amount, 0);
+  
+      const totalStudents = await Registration.countDocuments({});
+      
+      const monthlySalesData = await calculateMonthlySalesData();
+
+      const monthlyStudentsData = await calculateMonthlyStudentsData();
+
+      const stats = await Registration.aggregate([
+        { $group: { _id: '$curriculum', count: { $sum: 1 } } }
+    ]);
+
+    const curriculumStats = {
+        'Khmer Education Program': 0,
+        'International English Program': 0,
+        'Chinese Language Classes': 0,
+        'General English Program': 0
+    };
+
+    stats.forEach(stat => {
+        if (curriculumStats.hasOwnProperty(stat._id)) {
+            curriculumStats[stat._id] = stat.count;
+        }
+    });
+     
+      res.render('admin/analytics', { totalSales, totalStudents, monthlySalesData, monthlyStudentsData, curriculumStats}); 
+  
+    } catch (error) {
+      
+      console.error(error);
+      req.flash('error', 'Failed to fetch total sales');
+      res.redirect('/admin/students');
+    }
+  }));
+
+
+  async function calculateMonthlySalesData() {
+    const currentYear = new Date().getFullYear();
+    const monthlySalesData = Array.from({ length: 12 }, () => 0); // Initialize with zeros for each month
+    const fees = await Fee.find({});
+    
+    fees.forEach((fee) => {
+      const feeDate = new Date(fee.createdAt);
+      const feeMonth = feeDate.getMonth();
+      const feeYear = feeDate.getFullYear();
+      
+      if (feeYear === currentYear) {
+        monthlySalesData[feeMonth] += fee.amount;
+      }
+    });
+  
+    return monthlySalesData;
+  }
+  async function calculateMonthlyStudentsData() {
+    const currentYear = new Date().getFullYear();
+    const monthlyStudentsData = Array.from({ length: 12 }, () => 0); // Initialize with zeros for each month
+    const students = await Registration.find({});
+    console.log('Students Data:', students); // Add this line for debugging
+console.log('Monthly Students Data:', monthlyStudentsData); 
+    students.forEach((student) => {
+      const studentDate = new Date(student.createdAt);
+      const studentMonth = studentDate.getMonth();
+      const studentYear = studentDate.getFullYear();
+      
+      if (studentYear === currentYear) {
+        monthlyStudentsData[studentMonth] += 1; // Increment the count for the month
+      }
+    });
+  
+    return monthlyStudentsData;
+  }
+  
+
 
 module.exports = router;

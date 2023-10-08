@@ -43,6 +43,10 @@ const registrationSchema = new Schema({
         type: Number,
         default: 0,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now, // This sets the default value to the current date and time
+    },
     fee: [
         {
             type: Schema.Types.ObjectId,
@@ -57,6 +61,6 @@ const registrationSchema = new Schema({
         }
 
     ]
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Registration', registrationSchema);

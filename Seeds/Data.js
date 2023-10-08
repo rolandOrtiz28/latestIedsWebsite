@@ -17,7 +17,8 @@ module.exports=[
         phoneNumber: 95825465,
       },
       curriculum: "General English Program",
-        yearLevel: "Level 5"
+        yearLevel: "Level 5",
+        status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0002",
@@ -38,7 +39,8 @@ module.exports=[
         
       },
       curriculum: "International English Program",
-        yearLevel: "Level 4"
+        yearLevel: "Level 4",
+        status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0003",
@@ -59,7 +61,8 @@ module.exports=[
       
       },
       curriculum: "Khmer Education Program",
-      yearLevel: "Level 3"
+      yearLevel: "Level 3",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0004",
@@ -80,7 +83,8 @@ module.exports=[
         
       },
       curriculum: "General English Program",
-        yearLevel: "Level 6"
+        yearLevel: "Level 6",
+        status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0005",
@@ -101,7 +105,8 @@ module.exports=[
   
       },
       curriculum: "Chinese Language Classes",
-      yearLevel: "Level 2"
+      yearLevel: "Level 2",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0006",
@@ -121,7 +126,8 @@ module.exports=[
         phoneNumber: 94567890,
       },
       curriculum: "Computer Programs",
-      yearLevel: "Level 1"
+      yearLevel: "Level 1",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0007",
@@ -141,7 +147,8 @@ module.exports=[
         phoneNumber: 95678901,
       },
       curriculum: "Day-care",
-      yearLevel: "Level 1"
+      yearLevel: "Level 1",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0008",
@@ -161,7 +168,8 @@ module.exports=[
         phoneNumber: 96789012,
       },
       curriculum: "International English Program",
-      yearLevel: "Level 3"
+      yearLevel: "Level 3",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0009",
@@ -182,7 +190,8 @@ module.exports=[
         phoneNumber: 97890123,
       },
       curriculum: "General English Program",
-        yearLevel: "Level 4"
+        yearLevel: "Level 4",
+        status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0010",
@@ -203,7 +212,8 @@ module.exports=[
         phoneNumber: 98901234,
       },
       curriculum: "Khmer Education Program",
-      yearLevel: "Level 2"
+      yearLevel: "Level 2",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0011",
@@ -224,7 +234,8 @@ module.exports=[
         phoneNumber: 99012345,
       },
       curriculum: "International English Program",
-      yearLevel: "Level 1"
+      yearLevel: "Level 1",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0012",
@@ -245,7 +256,8 @@ module.exports=[
         phoneNumber: 91234567,
       },
       curriculum: "Chinese Language Classes",
-      yearLevel: "Level 6"
+      yearLevel: "Level 6",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0013",
@@ -266,7 +278,8 @@ module.exports=[
         phoneNumber: 92345678,
       },
       curriculum: "Computer Programs",
-      yearLevel: "Level 5"
+      yearLevel: "Level 5",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0014",
@@ -287,7 +300,8 @@ module.exports=[
         phoneNumber: 93456789,
       },
       curriculum: "Day-care",
-      yearLevel: "Level 3"
+      yearLevel: "Level 3",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0015",
@@ -308,7 +322,8 @@ module.exports=[
         phoneNumber: 94567890,
       },
       curriculum: "International English Program",
-      yearLevel: "Level 4"
+      yearLevel: "Level 4",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0016",
@@ -329,7 +344,8 @@ module.exports=[
         phoneNumber: 95678901,
       },
       curriculum: "General English Program",
-      yearLevel: "Level 2"
+      yearLevel: "Level 2",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0017",
@@ -350,7 +366,8 @@ module.exports=[
         phoneNumber: 96789012,
       },
       curriculum: "Khmer Education Program",
-      yearLevel: "Level 1"
+      yearLevel: "Level 1",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0018",
@@ -371,7 +388,8 @@ module.exports=[
         phoneNumber: 97890123,
       },
       curriculum: "International English Program",
-      yearLevel: "Level 6"
+      yearLevel: "Level 6",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0019",
@@ -392,7 +410,8 @@ module.exports=[
         phoneNumber: 98901234,
       },
       curriculum: "Chinese Language Classes",
-      yearLevel: "Level 3"
+      yearLevel: "Level 3",
+      status: "Approved"
     },
     {
         studentNumber: "IEDS2023-0020",
@@ -413,7 +432,8 @@ module.exports=[
         phoneNumber: 91234567,
       },
       curriculum: "Computer Programs",
-      yearLevel: "Level 5"
+      yearLevel: "Level 5",
+      status: "Approved"
     }
   ]
   
