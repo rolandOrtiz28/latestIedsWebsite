@@ -190,6 +190,23 @@ router.put('/students/:id/update', catchAsync(async (req, res) => {
     }
 }));
 
+// router.put('/students/:id/feeUpdate', catchAsync(async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { feeStatus } = req.body;
+
+//         // Update the student's feeStatus in the database
+//         const updatedStudent = await Registration.findByIdAndUpdate(id, { feeStatus }, { new: true });
+
+//         res.json({ success: true, feeStatus: updatedStudent.feeStatus, studentId: updatedStudent._id });
+
+//     } catch (err) {
+//         console.log(err.message);
+//         res.status(500).json({ success: false });
+//     }
+// }));
+
+
 router.put('/students/:id/feeUpdate', catchAsync(async (req, res) => {
     try {
         const { id } = req.params;
@@ -198,14 +215,17 @@ router.put('/students/:id/feeUpdate', catchAsync(async (req, res) => {
         // Update the student's feeStatus in the database
         const updatedStudent = await Registration.findByIdAndUpdate(id, { feeStatus }, { new: true });
 
-        res.json({ success: true, feeStatus: updatedStudent.feeStatus, studentId: updatedStudent._id });
+        // Update the feeStatus for all fees associated with the student
+        const updateResult = await Fee.updateMany({ _id: { $in: updatedStudent.fee } }, { status: feeStatus });
 
+        
+
+        res.json({ success: true, feeStatus: updatedStudent.feeStatus, studentId: updatedStudent._id });
     } catch (err) {
-        console.log(err.message);
+        console.error(err);
         res.status(500).json({ success: false });
     }
 }));
-
 
 router.delete('/students/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -220,7 +240,7 @@ router.put('/registrations/:registrationId/markPaid',  catchAsync(async (req, re
     try {
         // Find the registration by ID
         const registration = await Registration.findById(registrationId);
-console.log(registration)
+
         if (!registration) {
             return res.status(404).json({ message: 'Registration not found' });
         }
@@ -248,6 +268,8 @@ console.log(registration)
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }));
+
+
 
 // Update Fee
 router.put('/fees/:id//update', catchAsync(async (req, res) => {
@@ -385,8 +407,8 @@ router.delete('/updates/:id', catchAsync(async (req, res) => {
 router.get('/analytics', catchAsync(async (req, res) => {
     try {
       
-      const fees = await Fee.find({});
-      const totalSales = fees.reduce((total, fee) => total + fee.amount, 0);
+        const fees = await Fee.find({ status: "Paid" });
+        const totalSales = fees.reduce((total, fee) => total + fee.amount, 0);
   
       const totalStudents = await Registration.countDocuments({});
       
@@ -421,17 +443,18 @@ router.get('/analytics', catchAsync(async (req, res) => {
     }
   }));
 
-
   async function calculateMonthlySalesData() {
     const currentYear = new Date().getFullYear();
     const monthlySalesData = Array.from({ length: 12 }, () => 0); // Initialize with zeros for each month
-    const fees = await Fee.find({});
-    
+  
+    // Filter fees with status "Paid"
+    const fees = await Fee.find({ status: "Paid" });
+  
     fees.forEach((fee) => {
       const feeDate = new Date(fee.createdAt);
       const feeMonth = feeDate.getMonth();
       const feeYear = feeDate.getFullYear();
-      
+  
       if (feeYear === currentYear) {
         monthlySalesData[feeMonth] += fee.amount;
       }
@@ -443,8 +466,7 @@ router.get('/analytics', catchAsync(async (req, res) => {
     const currentYear = new Date().getFullYear();
     const monthlyStudentsData = Array.from({ length: 12 }, () => 0); // Initialize with zeros for each month
     const students = await Registration.find({});
-    console.log('Students Data:', students); // Add this line for debugging
-console.log('Monthly Students Data:', monthlyStudentsData); 
+ 
     students.forEach((student) => {
       const studentDate = new Date(student.createdAt);
       const studentMonth = studentDate.getMonth();

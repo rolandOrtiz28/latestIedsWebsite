@@ -6,6 +6,7 @@ const Fee = require('../model/fee')
 
 
 router.post('/admin/students/:studentId/fees', catchAsync(async (req, res) => {
+    
     try {
         const { studentId } = req.params;
         const { description, amount } = req.body;

@@ -33,8 +33,8 @@ const paymentRoute = require('./routes/payment')
 const cors = require('cors');
 const { assert } = require('console');
 
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/iedsinternationalschool'
-
+const dbUrl = 'mongodb://127.0.0.1:27017/iedsinternationalschool'
+// process.env.DB_URL || 
 
 mongoose.connect(dbUrl, {});
 const db = mongoose.connection;

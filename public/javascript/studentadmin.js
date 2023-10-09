@@ -48,6 +48,7 @@ $(document).on('change', '.student-feeStatus', function () {
         }
     });
 });
+
 $(document).on('change', '.student-feeStatus', function () {
     var registrationId = $(this).data('student-id');
     var feeStatus = $(this).val();
@@ -74,6 +75,8 @@ $(document).on('change', '.student-feeStatus', function () {
     }
     // No need to handle other fee status changes
 });
+
+
 
 
 // SEARCH
