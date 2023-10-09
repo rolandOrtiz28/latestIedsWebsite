@@ -70,7 +70,7 @@ router.get('/updates/:id', catchAsync(async (req, res) => {
 
 }))
 
-router.get('/schoolcalendar', async (req, res) => {
+router.get('/schoolcalendar',  catchAsync(async (req, res) => {
 
     const currentDate = moment();
     const year = currentDate.year();
@@ -104,7 +104,7 @@ router.get('/schoolcalendar', async (req, res) => {
 
 
     res.render('calendar/homecalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules })
-})
+}))
 
 function generateWeekCalendarData(year, month, startDayOfWeek) {
     const calendar = [];
@@ -153,33 +153,6 @@ function generateCalendarData(year, month) {
 }
 
 
-// router.put('/:id', upload.array('image'), catchAsync(async (req, res) => {
-//     const { id } = req.params;
-//     const article = await Article.findByIdAndUpdate(id, { ...req.body.article });
-//     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
-//     article.images.push(...imgs);
-//     await article.save()
-//     if (req.body.deleteImages) {
-//         for (let filename of req.body.deleteImages) {
-//             await cloudinary.uploader.destroy(filename);
-//         }
-//         await article.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
-//     }
-//     req.flash('success', 'Updated')
-//     res.redirect(`/articles/${article._id}`);
-
-// }))
-
-
-
-
-
-// router.delete('/:id', catchAsync(async (req, res) => {
-//     const { id } = req.params;
-//     await Article.findByIdAndDelete(id);
-//     res.redirect('/articles');
-
-// }))
 
 
 

@@ -35,7 +35,7 @@ router.get('/students', async (req, res) => {
 
 
 
-router.get('/pending', async (req, res) => {
+router.get('/pending',  catchAsync(async (req, res) => {
     try {
         const pendingRegistrations = await Registration.find({ status: 'Pending' });
         res.render('students/pending', { pendingRegistrations });
@@ -43,7 +43,9 @@ router.get('/pending', async (req, res) => {
         console.error(error);
         res.status(500).send('An error occurred');
     }
-});
+}));
+
+
 router.post('/student', catchAsync(async (req, res) => {
 
     const { firstName, lastName, age, address, gender, birthday } = req.body;
@@ -80,7 +82,7 @@ function generateRandomStudentId(length) {
     return `#IEDS${studentId}`;
 }
 
-router.post('/parents', (req, res) => {
+router.post('/parents',  catchAsync(async(req, res) => {
     const { fatherName, motherName, fatherOccupation, motherOccupation, phoneNumber } = req.body;
     req.session.registrationData.parents = {
         fatherName,
@@ -91,7 +93,7 @@ router.post('/parents', (req, res) => {
     };
     req.session.registrationData.yearLevel = req.body.yearLevel; // Add yearLevel here
     res.redirect('/registrationformcurriculum');
-});
+}));
 
 router.post('/curriculum', async (req, res) => {
     const { curriculum, yearLevel } = req.body;

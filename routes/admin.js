@@ -71,10 +71,10 @@ router.post('/register', catchAsync(async (req, res) => {
     }
 }));
 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/adminlogin', keepSessionInfo: true }), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/adminlogin', keepSessionInfo: true }), catchAsync( async(req, res) => {
     req.flash('success', "Welcome Admin")
     res.redirect('/')
-})
+}))
 
 
 router.get('/logout', (req, res, next) => {
@@ -135,7 +135,7 @@ router.get('/admin/students/search', isLoggedIn, catchAsync(async (req, res) => 
     }
 }));
 
-router.get('/admin/students/:id', isLoggedIn, async (req, res) => {
+router.get('/admin/students/:id', isLoggedIn,  catchAsync(async (req, res) => {
     try {
         const student = await Registration.findById(req.params.id).populate('fee');
 
@@ -145,7 +145,7 @@ router.get('/admin/students/:id', isLoggedIn, async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
-});
+}));
 
 
 router.put('/students/:id', upload.array('image'), isLoggedIn, catchAsync(async (req, res, next) => {
@@ -214,7 +214,7 @@ router.delete('/students/:id', catchAsync(async (req, res) => {
     res.redirect('/admin/students');
 }))
 
-router.put('/registrations/:registrationId/markPaid', async (req, res) => {
+router.put('/registrations/:registrationId/markPaid',  catchAsync(async (req, res) => {
     const registrationId = req.params.registrationId;
 
     try {
@@ -247,7 +247,7 @@ console.log(registration)
         console.error('Error marking fee as Paid:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}));
 
 // Update Fee
 router.put('/fees/:id//update', catchAsync(async (req, res) => {
