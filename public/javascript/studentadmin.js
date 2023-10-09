@@ -108,40 +108,40 @@ $(document).ready(function () {
                     var actionsTd = $('<td>'); // Create a <td> for actions
 
                     var dropdownMenu = $('<li class="nav-item dropdown">\
-                        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" role="button" \
-                        data-bs-toggle="dropdown" aria-expanded="false">Update</a>\
-                        <ul class="dropdown-menu dropdown-menu-end">\
-                            <li class="text-center dropdown-item" data-toggle="modal" \
-                                data-target="#studentDetailsModal" \
-                                data-student=\'' + JSON.stringify(student) + '\' \
-                                data-student-id=\'' + student._id + '\' \
-                                style="cursor: pointer;">View Details</li>\
-                            <li class="text-center">\
-                                <form class="d-inline text-center dropdown-item" \
-                                    action="/students/' + student._id + '?_method=DELETE" method="post">\
-                                    <button style="border: none; background: none;">Delete</button>\
-                                </form>\
-                            </li>\
-                            <li class="text-center">\
-                                <a class="dropdown-item" data-bs-toggle="modal" \
-                                    data-bs-target="#updateStudent' + student._id + '" \
-                                    data-bs-whatever="@getbootstrap" style="cursor: pointer;">Update</a>\
-                            </li>\
-                            <li class="text-center">\
-                                <a class="dropdown-item" data-bs-toggle="modal" \
-                                    data-bs-target="#addFeeModal' + student._id + '" \
-                                    data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Fee</a>\
-                            </li>\
-                            <li class="text-center">\
-                                <a class="dropdown-item" data-bs-toggle="modal" \
-                                    data-bs-target="#addGradeModal' + student._id + '" \
-                                    data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Grade</a>\
-                            </li>\
-                            <li class="text-center">\
-                            <a href="/payment/ ' + student._id + '">Payment Info</a>\
-                            </li>\
-                        </ul>\
-                    </li>');
+                    <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" role="button" \
+                    data-bs-toggle="dropdown" aria-expanded="false">Update</a>\
+                    <ul class="dropdown-menu dropdown-menu-end">\
+                        <li class="list-group-item dropdown-item" data-toggle="modal" \
+                            data-target="#studentDetailsModal" \
+                            data-student=\'' + JSON.stringify(student) + '\' \
+                            data-student-id=\'' + student._id + '\' \
+                            style="cursor: pointer;">View Details</li>\
+                        <li class="list-group-item">\
+                            <form class="d-inline dropdown-item" \
+                                action="/students/' + student._id + '?_method=DELETE" method="post">\
+                                <button style="border: none; background: none;">Delete</button>\
+                            </form>\
+                        </li>\
+                        <li class="list-group-item">\
+                            <a class="dropdown-item" data-bs-toggle="modal" \
+                                data-bs-target="#updateStudent' + student._id + '" \
+                                data-bs-whatever="@getbootstrap" style="cursor: pointer;">Update</a>\
+                        </li>\
+                        <li class="list-group-item">\
+                            <a class="dropdown-item" data-bs-toggle="modal" \
+                                data-bs-target="#addFeeModal' + student._id + '" \
+                                data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Fee</a>\
+                        </li>\
+                        <li class="list-group-item">\
+                            <a class="dropdown-item" data-bs-toggle="modal" \
+                                data-bs-target="#addGradeModal' + student._id + '" \
+                                data-bs-whatever="@getbootstrap" style="cursor: pointer;">Add Grade</a>\
+                        </li>\
+                        <li class="list-group-item payment">\
+                            <a href="/payment/' + student._id + '" class="dropdown-item">Payment Info</a>\
+                        </li>\
+                    </ul>\
+                </li>');
 
                     // Create a <td> for the fee status select
                     var feeStatusTd = $('<td>').append('<select class="form-select form-select-sm student-feeStatus"\
