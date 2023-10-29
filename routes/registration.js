@@ -7,6 +7,10 @@ const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage })
 const { cloudinary } = require('../cloudinary');
+const QRCode = require('qrcode');
+const fs = require('fs');
+const path = require('path');
+
 
 router.get('/registrationform', catchAsync(async (req, res) => {
     
@@ -29,7 +33,8 @@ router.get('/registrationformcurriculum', catchAsync(async (req, res) => {
 router.get('/students', async (req, res) => {
 
     const students = await Registration.find({})
-
+   
+   
     res.render('students/index', { students })
 })
 
@@ -110,7 +115,6 @@ router.post('/curriculum', async (req, res) => {
     res.redirect('/pending')
 });
 
-
 router.post('/adminStudent', upload.array('image'), catchAsync(async (req, res) => {
     // Generate a random 5-digit student ID
     const studentId = generateRandomStudentId(5);
@@ -139,6 +143,7 @@ router.post('/adminStudent', upload.array('image'), catchAsync(async (req, res) 
 
     const student = new Registration(studentData);
     student.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+
     await student.save();
     req.flash('success', 'Student added')
     res.redirect(`/admin/students`);
@@ -156,8 +161,6 @@ function generateRandomStudentId(length) {
 
     return `#${studentId}`;
 }
-
-
 
 
 module.exports = router

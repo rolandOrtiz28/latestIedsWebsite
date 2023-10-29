@@ -210,3 +210,74 @@
 }
 
 
+.yearly-calendar .row{
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 10px;
+
+}
+
+.yearly-calendar .monthly-calendar{
+width: 250px;
+height: 200px;
+font-size: 12px;
+
+}
+
+
+.monthly-calendar .today {
+    background: linear-gradient(to bottom, #ffffff 0%, rgba(51, 133, 255, 0.3) 100%);
+height: 10px;
+width: 25px;
+border-radius: 5px;
+}
+
+
+.date-cell {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.year-sched {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events: none; /* Allows interaction with date cell below */
+    z-index: 1; /* Ensures it's on top of the date cell */
+    color: white;
+    text-align: center;
+    width: 25px;
+   
+}
+
+.year-tbody{
+    box-shadow: 10px 5px 5px #0077b6;
+    text-align: center;
+
+}
+
+.year-tbody td{
+
+    text-align: center;
+}
+
+.tr-weeks{
+    /* border: 2px solid #3385ff;  */
+    box-shadow: 10px 5px 5px #0077b6;
+    text-align: start; 
+    font-weight: 200; font-size: 13px;
+
+}
+.monthly-calendar thead {
+font-weight: 100;
+
+margin-top: 2rem;
+}

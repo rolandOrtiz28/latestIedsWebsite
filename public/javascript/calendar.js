@@ -18,7 +18,10 @@
 
 // datepicker
 
-
+$(document).ready(function() {
+    // Set the "Year" tab as active when the page loads
+    $('#year-tab').tab('show');
+});
 
 
 // deleting the schedule

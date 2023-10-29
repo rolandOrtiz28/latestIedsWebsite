@@ -289,9 +289,88 @@ router.put('/fees/:id//update', catchAsync(async (req, res) => {
 
 
 // SCHOOL CALENDAR
+// router.get('/admin/calendar', isLoggedIn, catchAsync(async (req, res) => {
+//     const currentDate = moment();
+//     const year = currentDate.year();
+//     let month = currentDate.month() + 1;
+
+
+//     if (req.query.month) {
+
+//         const requestedMonth = parseInt(req.query.month);
+
+
+//         if (requestedMonth >= 1 && requestedMonth <= 12) {
+//             month = requestedMonth;
+//         }
+//     }
+//     const monthNames = [
+//         'January', 'February', 'March', 'April', 'May', 'June',
+//         'July', 'August', 'September', 'October', 'November', 'December'
+//     ];
+//     const monthName = monthNames[month - 1];
+
+//     const calendar = generateCalendarData(year, month)
+//     const startDayOfWeek = 0;
+//     const weeks = generateWeekCalendarData(year, month, startDayOfWeek);
+//     const isMonthActive = req.query.tab !== 'week';
+//     const isWeekActive = !isMonthActive;
+//     const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
+//     const endDay = firstDayOfMonth.clone().endOf('month').endOf('week');
+//     const schedules = await Schedule.find({ date: { $gte: firstDayOfMonth, $lte: endDay } });
+
+
+//     res.render('admin/schoolCalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules });
+// }));
+
+// function generateWeekCalendarData(year, month, startDayOfWeek) {
+//     const calendar = [];
+
+//     const currentDate = moment();
+//     const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
+//     const currentDay = currentDate.startOf('week').add(startDayOfWeek, 'days');
+
+//     const week = [];
+//     for (let i = 0; i < 7; i++) {
+//         week.push({
+//             day: currentDay.date(),
+//             isCurrentMonth: currentDay.month() === firstDayOfMonth.month(),
+//             isToday: currentDay.isSame(moment(), 'day')
+//         });
+//         currentDay.add(1, 'day');
+//     }
+
+//     calendar.push(week);
+
+//     return calendar;
+// }
+
+
+// function generateCalendarData(year, month) {
+//     const calendar = []
+
+//     const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month')
+//     const startDay = firstDayOfMonth.clone().startOf('week')
+//     const endDay = firstDayOfMonth.clone().endOf('month').endOf('week')
+//     let currentDay = startDay.clone();
+//     while (currentDay.isSameOrBefore(endDay, 'day')) {
+//         const week = [];
+//         for (let i = 0; i < 7; i++) {
+//             week.push({
+//                 day: currentDay.date(),
+//                 isCurrentMonth: currentDay.month() === firstDayOfMonth.month(),
+//                 isToday: currentDay.isSame(moment(), 'day')
+//             });
+//             currentDay.add(1, 'day');
+//         }
+//         calendar.push(week);
+//     }
+
+//     return calendar;
+// }
 router.get('/admin/calendar', isLoggedIn, catchAsync(async (req, res) => {
     const currentDate = moment();
-    const year = currentDate.year();
+    let year = req.query.year ? parseInt(req.query.year) : currentDate.year();
     let month = currentDate.month() + 1;
 
 
@@ -315,12 +394,22 @@ router.get('/admin/calendar', isLoggedIn, catchAsync(async (req, res) => {
     const weeks = generateWeekCalendarData(year, month, startDayOfWeek);
     const isMonthActive = req.query.tab !== 'week';
     const isWeekActive = !isMonthActive;
+    const isYearActive = req.query.tab === 'year';
     const firstDayOfMonth = moment({ year, month: month - 1 }).startOf('month');
     const endDay = firstDayOfMonth.clone().endOf('month').endOf('week');
     const schedules = await Schedule.find({ date: { $gte: firstDayOfMonth, $lte: endDay } });
+    const yearData = generateYearCalendarData(year);
+    const startOfYear = moment({ year }).startOf('year');
+    const endOfYear = moment({ year }).endOf('year');
 
+    console.log('tab parameter in URL:', req.query.tab);
 
-    res.render('admin/schoolCalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules });
+    // Check if isYearActive and isMonthActive are set correctly
+    console.log('isYearActive:', isYearActive);
+    console.log('isMonthActive:', isMonthActive);
+
+    const events = await Schedule.find({ date: { $gte: startOfYear, $lte: endOfYear } });
+    res.render('admin/schoolCalendar', { year, month, monthName, calendar, weeks, isWeekActive, isMonthActive, schedules, isYearActive: false, yearData, monthNames, events });
 }));
 
 function generateWeekCalendarData(year, month, startDayOfWeek) {
@@ -368,6 +457,31 @@ function generateCalendarData(year, month) {
 
     return calendar;
 }
+
+function generateYearCalendarData(year) {
+    const yearData = [];
+
+    for (let month = 0; month < 12; month++) {
+        const monthData = [];
+        const firstDayOfMonth = moment({ year, month }).startOf('month');
+        const daysInMonth = firstDayOfMonth.daysInMonth();
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const currentDay = moment({ year, month, day });
+            monthData.push({
+                day,
+                isCurrentMonth: true, // Assuming all days are in the current month
+                isToday: currentDay.isSame(moment(), 'day')
+                // Add more information as needed
+            });
+        }
+
+        yearData.push(monthData);
+    }
+
+    return yearData;
+}
+
 
 // updates
 router.get('/updates-dashboard', isLoggedIn, catchAsync(async (req, res) => {

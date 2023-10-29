@@ -5,7 +5,7 @@ const Registration = require('../model/registration');
 
 router.get('/sidebar', async (req, res) => {
     const students = await Registration.find({})
-
+    
    res.render('studentsearch/sidebar', { students });
 })
 

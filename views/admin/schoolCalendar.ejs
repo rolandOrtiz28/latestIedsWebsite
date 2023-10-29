@@ -10,18 +10,65 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="/stylesheet/calendar.css">
+    <style>
+            @media print {
+  /* Set the page size and margins */
+  @page {
+    size: auto;
+    margin: 0;
+  }
 
+  body * {
+    visibility: hidden;
+    margin: 0;
+  }
+
+  #printable-content, #printable-content * {
+    visibility: visible;
+    page-break-inside: avoid;
+    margin-top: 2rem;
+ 
+    
+  }
+
+  #year{
+width: 80%;
+    overflow: visible !important; 
+        float:none !important;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        display:block !important;
+        height:auto !important;
+     margin-left: 10rem;
+     text-align: center;
+  }
+
+  /* Reduce font size for calendar cells */
+  .year-tbody td {
+    font-size: 10px; /* Adjust as needed */
+  }
+
+  /* Reduce padding or margins if necessary */
+  .year-tbody td {
+    padding: 2px; /* Adjust as needed */
+  }
+}
+    </style>
 
     <div class="container dash-content ">
 
         <div class="container">
             <h1 class="text-center text-capitalize">Calendar</h1>
-
+            <% const isMonthTabActive = !isYearActive && isMonthActive; %>
             <ul class="nav nav-tabs">
-
                 <li class="nav-item">
-                    <a class="nav-link <%= isMonthActive ? 'active' : '' %>" id="month-tab" data-bs-toggle="tab"
-                        href="#month" role="tab" aria-controls="month" aria-selected="<%= isMonthActive %>">Month</a>
+                    <a class="nav-link <%= isYearActive ? 'active' : '' %>" id="year-tab" data-bs-toggle="tab"
+                        href="#year" role="tab" aria-controls="year" aria-selected="<%= isYearActive %>">Year</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= isMonthTabActive ? 'active' : '' %>" id="month-tab" data-bs-toggle="tab"
+                        href="#month" role="tab" aria-controls="month" aria-selected="<%= isMonthTabActive %>">Month</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <%= isWeekActive ? 'active' : '' %>" id="week-tab" data-bs-toggle="tab"
@@ -33,6 +80,98 @@
                 </li>
             </ul>
             <div class="tab-content">
+                
+                <div class="tab-pane mb-4 fade <%= isYearActive ? 'show active' : '' %>" id="year" role="tabpanel" aria-labelledby="year-tab">
+                    <h2><%= year %> Overview</h2>
+                    <div class="yearly-calendar" id="yearly-calendar">
+                        <!-- <button class="btn btn-primary d-print-none" id="print-year">Print Year View</button> -->
+                        <div id="printable-content">
+                        <div class="row">
+                            <% for (let monthIndex = 0; monthIndex < yearData.length; monthIndex++) { %>
+                                <div class="col-md-3">
+                                    <table class="monthly-calendar">
+                                        <thead>
+                                            <tr class="mt-5 text-muted">
+                                                <th colspan="7" ><%= monthNames[monthIndex] %></th>
+                                            </tr>
+                                            <tr class="tr-weeks text-muted" style="font-weight: 200;">
+                                                <th>Sun</th>
+                                                <th>Mon</th>
+                                                <th>Tue</th>
+                                                <th>Wed</th>
+                                                <th>Thu</th>
+                                                <th>Fri</th>
+                                                <th>Sat</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="year-tbody">
+                                            <% let week = [] %>
+                                            <% for (let day of yearData[monthIndex]) { %>
+                                                <% week.push(day) %>
+                                                <% if (week.length === 7) { %>
+                                                    <tr>
+                                                        <% for (let weekDay of week) { %>
+                                                            <td class="<%= weekDay.isCurrentMonth ? 'current-month' : '' %> <%= weekDay.isToday ? 'today' : '' %>">
+                                                                <div class="date-cell">
+                                                                    <%= weekDay.day %>
+                                                                    <% for (let schedule of events) { %>
+                                                                        <% if (schedule.date.getDate() === weekDay.day &&
+                                                                            schedule.date.getMonth() === monthIndex &&
+                                                                            schedule.date.getFullYear() === year) { %>
+                                                                            <div class="year-sched <%= schedule.backgroundColor.toLowerCase() + '-bg' %>">
+                                                                                <%= weekDay.day %>
+                                                                            </div>
+                                                                        <% } %>
+                                                                    <% } %>
+                                                                </div>
+                                                            </td>
+                                                        <% } %>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="7"></td>
+                                                    </tr>
+                                                    <% week = [] %>
+                                                <% } %>
+                                            <% } %>
+                                            <% if (week.length > 0) { %>
+                                                <tr>
+                                                    <% for (let weekDay of week) { %>
+                                                        <td class="<%= weekDay.isCurrentMonth ? 'current-month' : '' %> <%= weekDay.isToday ? 'today' : '' %>">
+                                                            <div class="date-cell">
+                                                                <%= weekDay.day %>
+                                                                <% for (let schedule of schedules) { %>
+                                                                    <% if (schedule.date.getDate() === weekDay.day &&
+                                                                        schedule.date.getMonth() === monthIndex &&
+                                                                        schedule.date.getFullYear() === year) { %>
+                                                                        <div class="year-sched <%= schedule.backgroundColor.toLowerCase() + '-bg' %>">
+                                                                            <%= weekDay.day %>
+                                                                        </div>
+                                                                    <% } %>
+                                                                <% } %>
+                                                            </div>
+                                                        </td>
+                                                    <% } %>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pagination col-3 ms-auto">
+    
+       
+   
+        <a href="/admin/calendar?year=<%= year - 1 %>&tab=year">Previous Year</a>
+        <a href="/admin/calendar?year=<%= year + 1 %>&tab=year">Next Year</a>
+   
+</div>
+                </div>
+        
+            
+
                 <div class="tab-pane fade <%= isMonthActive ? 'show active' : '' %>" id="month" role="tabpanel"
                     aria-labelledby="month-tab">
                     <div class="row">
@@ -73,7 +212,7 @@
                                                         <small type="text" class="small text-white"
                                                             data-toggle="tooltip" data-html="true" title="
                                                         <%= schedule.title %>
-                                                        <%= schedule.time %>" style="margin-left: 1em;font-size: 10px;">
+                                                        <%= schedule.time %>" style="margin-left: 1em;">
                                                             <%= schedule.title %>
                                                         </small>
                                                     </div>
@@ -90,14 +229,20 @@
                                 <% } %>
                         </tbody>
                     </table>
+        
                     <div class="pagination col-3 ms-auto">
     <% if (month > 1) { %>
-        <a href="/admin/calendar?month=<%= month - 1 %>"><span class="material-symbols-outlined left">arrow_back_ios</span></a>
+        <a href="/admin/calendar?year=<%= year %>&month=<%= month - 1 %>&tab=month">
+            <span class="material-symbols-outlined left">arrow_back_ios</span>
+        </a>
     <% } %>
     <% if (month < 12) { %>
-        <a href="/admin/calendar?month=<%= month + 1 %>"><span class="material-symbols-outlined right">arrow_forward_ios</span></a>
+        <a href="/admin/calendar?year=<%= year %>&month=<%= month + 1 %>&tab=month">
+            <span class="material-symbols-outlined right">arrow_forward_ios</span>
+        </a>
     <% } %>
 </div>
+
                 </div>
                 <div class="tab-pane week fade <%= isWeekActive ? 'show active' : '' %>" id="week" role="tabpanel"
                     aria-labelledby="week-tab">
@@ -178,3 +323,9 @@
 
 
     <%- include('../modals/events') %>
+        <script src="/javascript/calendar.js"></script>
+        <script>
+  document.getElementById('print-year').addEventListener('click', function () {
+    window.print();
+  });
+</script>
